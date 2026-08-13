@@ -1,0 +1,10 @@
+# 회사 내부 자료 — 커밋 금지
+*.xlsx
+*.xls
+*.csv
+
+# OS / 편집기
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
