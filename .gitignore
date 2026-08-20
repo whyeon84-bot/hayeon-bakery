@@ -2,6 +2,9 @@
 *.xlsx
 *.xls
 *.csv
+*.DRT
+*.drt
+~$*
 
 # OS / 편집기
 Thumbs.db

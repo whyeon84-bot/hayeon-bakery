@@ -61,6 +61,17 @@
       radial-gradient(1000px 460px at 82% -10%, rgba(242,193,78,.30), transparent 62%),
       radial-gradient(760px 400px at 6% 105%, rgba(201,131,74,.18), transparent 60%);
   }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(28px,5vw,60px); align-items:center; }
+  @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero-photo{
+    width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:20px;
+    box-shadow:0 18px 44px rgba(74,47,26,.22); border:1px solid var(--line);
+  }
+  @media (max-width:860px){ .hero-photo{ aspect-ratio:16/10; } }
+  .about-photo{
+    width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:16px;
+    border:1px solid var(--line); box-shadow:var(--shadow); margin-bottom:14px;
+  }
   .eyebrow{
     display:inline-flex; align-items:center; gap:9px;
     font-size:13px; letter-spacing:.14em; text-transform:uppercase;
@@ -105,11 +116,17 @@
   .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(248px,1fr)); gap:20px; }
   .card{
     background:var(--white); border:1px solid var(--line); border-radius:16px;
-    padding:26px 24px 24px; box-shadow:var(--shadow);
+    padding:0; overflow:hidden; box-shadow:var(--shadow);
     transition:transform .18s, box-shadow .18s, border-color .18s;
   }
   .card:hover{ transform:translateY(-4px); border-color:var(--caramel); box-shadow:0 14px 34px rgba(74,47,26,.13); }
-  .card .ico{ font-size:34px; line-height:1; display:block; margin-bottom:14px; }
+  .card .thumb{
+    display:block; width:100%; aspect-ratio:4/3; object-fit:cover;
+    background:var(--cream-2); transition:transform .4s ease;
+  }
+  .card:hover .thumb{ transform:scale(1.04); }
+  .card .thumb-box{ overflow:hidden; }
+  .card .body{ padding:20px 22px 22px; }
   .card h3{ font-size:19px; margin-bottom:6px; }
   .card .sub{ font-size:12.5px; color:var(--butter); font-weight:700; letter-spacing:.06em; text-transform:uppercase; margin-bottom:10px; }
   .card p{ margin:0; font-size:14.5px; color:var(--muted); line-height:1.7; }
@@ -224,17 +241,20 @@
 </nav>
 
 <header id="top">
-  <div class="wrap">
-    <span class="eyebrow">Baker &amp; Pâtissier</span>
-    <h1>반죽에서 시작해<br><em>하루의 온도</em>를 굽습니다.</h1>
-    <p class="lede">
-      천연 발효종과 국산 밀을 고집하는 제빵사 원하연입니다.
-      느리게 부풀린 반죽이 만드는 결과 향, 그 사소한 차이를 좋아합니다.
-    </p>
-    <div class="cta">
-      <a class="btn btn-solid" href="#works">대표 작품 보기</a>
-      <a class="btn btn-ghost" href="#game">🍞 빵 테트리스 하기</a>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Baker &amp; Pâtissier</span>
+      <h1>반죽에서 시작해<br><em>하루의 온도</em>를 굽습니다.</h1>
+      <p class="lede">
+        천연 발효종과 국산 밀을 고집하는 제빵사 원하연입니다.
+        느리게 부풀린 반죽이 만드는 결과 향, 그 사소한 차이를 좋아합니다.
+      </p>
+      <div class="cta">
+        <a class="btn btn-solid" href="#works">대표 작품 보기</a>
+        <a class="btn btn-ghost" href="#game">🍞 빵 테트리스 하기</a>
+      </div>
     </div>
+    <img class="hero-photo" src="img/hero.jpg" alt="갓 구워낸 통밀 사워도우 빵" width="900" height="1125">
   </div>
 </header>
 
@@ -262,6 +282,7 @@
         </p>
       </div>
       <div class="stats">
+        <img class="about-photo" src="img/shop.jpg" alt="빵이 진열된 베이커리 매장" loading="lazy">
         <div class="stat"><b>8년</b><span>제빵 실무 경력</span></div>
         <div class="stat"><b>60+</b><span>개발한 레시피</span></div>
         <div class="stat"><b>1,200명</b><span>클래스 수강생</span></div>
@@ -279,40 +300,52 @@
     </div>
     <div class="grid reveal">
       <div class="card">
-        <span class="ico">🥖</span>
-        <div class="sub">Sourdough</div>
-        <h3>36시간 사워도우</h3>
-        <p>자가배양 스타터로 36시간 저온 발효. 얇고 바삭한 크러스트 안에 촉촉한 기공이 살아 있습니다.</p>
+        <div class="thumb-box"><img class="thumb" src="img/bread1.jpg" alt="36시간 저온 발효 사워도우" loading="lazy"></div>
+        <div class="body">
+          <div class="sub">Sourdough</div>
+          <h3>36시간 사워도우</h3>
+          <p>자가배양 스타터로 36시간 저온 발효. 얇고 바삭한 크러스트 안에 촉촉한 기공이 살아 있습니다.</p>
+        </div>
       </div>
       <div class="card">
-        <span class="ico">🥐</span>
-        <div class="sub">Viennoiserie</div>
-        <h3>버터 크루아상</h3>
-        <p>프랑스산 AOP 버터로 3절 3회 접기. 27겹의 결이 부서지는 소리를 기준으로 굽습니다.</p>
+        <div class="thumb-box"><img class="thumb" src="img/bread2.jpg" alt="버터 크루아상" loading="lazy"></div>
+        <div class="body">
+          <div class="sub">Viennoiserie</div>
+          <h3>버터 크루아상</h3>
+          <p>프랑스산 AOP 버터로 3절 3회 접기. 27겹의 결이 부서지는 소리를 기준으로 굽습니다.</p>
+        </div>
       </div>
       <div class="card">
-        <span class="ico">🍞</span>
-        <div class="sub">Signature</div>
-        <h3>우유 식빵</h3>
-        <p>탕종법으로 수분을 잡아 3일이 지나도 부드럽습니다. 매장 판매 1위 제품입니다.</p>
+        <div class="thumb-box"><img class="thumb" src="img/bread3.jpg" alt="우유 식빵" loading="lazy"></div>
+        <div class="body">
+          <div class="sub">Signature</div>
+          <h3>우유 식빵</h3>
+          <p>탕종법으로 수분을 잡아 3일이 지나도 부드럽습니다. 매장 판매 1위 제품입니다.</p>
+        </div>
       </div>
       <div class="card">
-        <span class="ico">🥯</span>
-        <div class="sub">New York Style</div>
-        <h3>수제 베이글</h3>
-        <p>몰트 물에 데쳐 구운 쫀득한 식감. 플레인, 어니언, 흑임자 세 가지로 운영합니다.</p>
+        <div class="thumb-box"><img class="thumb" src="img/bread4.jpg" alt="오늘의 모듬 빵 바구니" loading="lazy"></div>
+        <div class="body">
+          <div class="sub">Daily</div>
+          <h3>오늘의 모듬 빵</h3>
+          <p>그날 상태가 가장 좋은 반죽으로 굽는 대여섯 가지. 아침 8시에 한 번만 나옵니다.</p>
+        </div>
       </div>
       <div class="card">
-        <span class="ico">🥨</span>
-        <div class="sub">German</div>
-        <h3>버터 프레첼</h3>
-        <p>알칼리 용액에 담가 낸 진한 갈색 표면과 굵은소금의 대비. 오후 2시에만 나옵니다.</p>
+        <div class="thumb-box"><img class="thumb" src="img/bread5.jpg" alt="시골빵 캄파뉴" loading="lazy"></div>
+        <div class="body">
+          <div class="sub">Country</div>
+          <h3>시골빵 캄파뉴</h3>
+          <p>호밀을 섞어 진하게 구운 큰 덩어리 빵. 쿠프가 벌어진 자리에 향이 가장 잘 남습니다.</p>
+        </div>
       </div>
       <div class="card">
-        <span class="ico">🧁</span>
-        <div class="sub">Seasonal</div>
-        <h3>제철 과일 타르트</h3>
-        <p>계절마다 재료를 바꾸는 유일한 메뉴. 여름에는 무화과, 겨울에는 딸기를 씁니다.</p>
+        <div class="thumb-box"><img class="thumb" src="img/bread6.jpg" alt="제철 과일 디저트" loading="lazy"></div>
+        <div class="body">
+          <div class="sub">Seasonal</div>
+          <h3>제철 과일 디저트</h3>
+          <p>계절마다 재료를 바꾸는 유일한 메뉴. 여름에는 무화과, 겨울에는 딸기를 씁니다.</p>
+        </div>
       </div>
     </div>
   </div>
