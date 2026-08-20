@@ -244,6 +244,72 @@
   .fx-note{ font-size:12px; color:var(--butter); font-weight:700; margin-top:6px; }
   .fx-state{ color:var(--muted); font-size:14.5px; padding:18px 0; }
 
+  /* 클릭 가능한 환율 카드 */
+  .fx-card{
+    cursor:pointer; text-align:left; width:100%; font:inherit; color:inherit;
+    transition:transform .18s, box-shadow .18s, border-color .18s;
+  }
+  .fx-card:hover, .fx-card:focus-visible{
+    transform:translateY(-3px); border-color:var(--caramel);
+    box-shadow:0 12px 28px rgba(74,47,26,.14); outline:none;
+  }
+  .fx-more{ font-size:12px; color:var(--muted); margin-top:10px; }
+  .fx-more span{ color:var(--caramel); font-weight:700; }
+
+  /* 그래프 모달 */
+  .modal{
+    position:fixed; inset:0; z-index:100; display:none;
+    align-items:center; justify-content:center; padding:20px;
+    background:rgba(56,37,26,.55); backdrop-filter:blur(3px);
+  }
+  .modal.show{ display:flex; }
+  .modal-box{
+    background:var(--white); border:1px solid var(--line); border-radius:18px;
+    width:min(760px, 100%); max-height:90vh; overflow:auto;
+    padding:clamp(20px,3.4vw,30px); box-shadow:0 24px 60px rgba(74,47,26,.3);
+  }
+  .modal-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:4px; }
+  .modal-head h3{ font-size:22px; }
+  .modal-sub{ font-size:13px; color:var(--muted); margin:2px 0 18px; }
+  .modal-x{
+    border:1px solid var(--line); background:var(--cream); color:var(--ink);
+    width:34px; height:34px; border-radius:9px; cursor:pointer; font-size:17px; line-height:1; flex:none;
+  }
+  .modal-x:hover{ background:var(--cream-2); }
+
+  .fx-stats{ display:grid; grid-template-columns:repeat(auto-fit, minmax(110px,1fr)); gap:10px; margin-bottom:18px; }
+  .fx-stat{ background:var(--cream); border:1px solid var(--line); border-radius:11px; padding:11px 13px; }
+  .fx-stat span{ display:block; font-size:11.5px; color:var(--muted); letter-spacing:.04em; }
+  .fx-stat b{ font-family:var(--serif); font-size:19px; color:var(--crust); }
+  .fx-stat b.up{ color:#B23B2E; }
+  .fx-stat b.down{ color:#2F6B4F; }
+
+  .chart-wrap{ position:relative; width:100%; }
+  .chart-wrap svg{ display:block; width:100%; height:auto; touch-action:none; }
+  .grid-line{ stroke:var(--line); stroke-width:1; }
+  .axis-text{ fill:var(--muted); font-size:11px; font-family:var(--sans); }
+  .fx-line{ fill:none; stroke:#C9834A; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
+  .fx-area{ fill:rgba(201,131,74,.12); }
+  .fx-dot{ fill:#C9834A; stroke:var(--white); stroke-width:2; }
+  .cross{ stroke:var(--caramel); stroke-width:1; stroke-dasharray:3 3; opacity:0; }
+  .tip{
+    position:absolute; pointer-events:none; opacity:0; transform:translate(-50%,-120%);
+    background:var(--oven); color:var(--cream); padding:7px 11px; border-radius:9px;
+    font-size:12.5px; line-height:1.5; white-space:nowrap; box-shadow:0 6px 18px rgba(0,0,0,.24);
+    transition:opacity .12s;
+  }
+  .tip b{ font-size:14px; }
+
+  .tbl-toggle{
+    margin-top:14px; background:none; border:none; color:var(--caramel);
+    font:inherit; font-size:13px; font-weight:700; cursor:pointer; padding:0; text-decoration:underline;
+  }
+  .fx-table{ width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; display:none; }
+  .fx-table.show{ display:table; }
+  .fx-table th, .fx-table td{ border-bottom:1px solid var(--line); padding:7px 8px; text-align:right; }
+  .fx-table th:first-child, .fx-table td:first-child{ text-align:left; }
+  .fx-table th{ color:var(--muted); font-weight:700; font-size:11.5px; }
+
   /* reveal */
   .reveal{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in{ opacity:1; transform:none; }
@@ -463,7 +529,7 @@
     <div class="sec-head reveal">
       <span class="sec-num">05</span>
       <h2>오늘의 재료 환율</h2>
-      <p>버터도 밀도 대부분 수입입니다. 환율이 오르면 다음 달 원가가 오릅니다. 관세청이 매주 고시하는 수입 과세환율을 그대로 가져옵니다.</p>
+      <p>버터도 밀도 대부분 수입입니다. 환율이 오르면 다음 달 원가가 오릅니다. 관세청이 매주 고시하는 수입 과세환율이며, <strong>카드를 누르면 최근 6개월 추이</strong>를 볼 수 있습니다.</p>
     </div>
     <div class="reveal">
       <div class="fx-meta" id="fxMeta"></div>
@@ -487,6 +553,19 @@
     </div>
   </div>
 </section>
+
+<div class="modal" id="fxModal" role="dialog" aria-modal="true" aria-labelledby="fxmTitle">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3 id="fxmTitle">환율 추이</h3>
+        <p class="modal-sub" id="fxmSub">최근 6개월 · 관세청 주간 고시</p>
+      </div>
+      <button class="modal-x" id="fxmClose" aria-label="닫기">✕</button>
+    </div>
+    <div id="fxmBody"></div>
+  </div>
+</div>
 
 <footer>© 2026 원하연 (Hayeon Won). 반죽부터 굽기까지 직접 만들었습니다. 🥖</footer>
 
@@ -846,7 +925,7 @@
         `<span>출처 ${data.source}</span>`;
 
       gridEl.innerHTML = data.rates.map(r => `
-        <div class="fx-card">
+        <button class="fx-card" data-code="${r.code}" data-ko="${r.ko}">
           <div class="fx-top">
             <span class="fx-flag">${r.flag}</span>
             <span class="fx-code">${r.code}</span>
@@ -854,8 +933,13 @@
           </div>
           <div class="fx-rate">${fmtRate(r.rate)}<small>원</small></div>
           <div class="fx-note">${r.note}</div>
-        </div>
+          <div class="fx-more"><span>6개월 추이 보기 →</span></div>
+        </button>
       `).join('');
+
+      gridEl.querySelectorAll('.fx-card').forEach(btn => {
+        btn.addEventListener('click', () => openChart(btn.dataset.code, btn.dataset.ko));
+      });
 
       stateEl.style.display = 'none';
     })
@@ -864,6 +948,137 @@
       stateEl.textContent =
         '환율을 불러오지 못했습니다. (' + err.message + ')';
     });
+
+  /* ---------- 6개월 추이 그래프 ---------- */
+  const modal   = document.getElementById('fxModal');
+  const mTitle  = document.getElementById('fxmTitle');
+  const mSub    = document.getElementById('fxmSub');
+  const mBody   = document.getElementById('fxmBody');
+  const mClose  = document.getElementById('fxmClose');
+  const cache   = {};
+
+  function closeModal(){ modal.classList.remove('show'); }
+  mClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+  const shortDate = (s) => `${+s.slice(4,6)}/${+s.slice(6,8)}`;
+
+  function openChart(code, ko){
+    modal.classList.add('show');
+    mTitle.textContent = `${code} ${ko} · 6개월 추이`;
+    mSub.textContent = '최근 6개월 · 관세청 주간 고시 (수입 과세환율)';
+    mClose.focus();
+
+    if(cache[code]){ drawChart(cache[code]); return; }
+    mBody.innerHTML = '<p class="fx-state">그래프를 그리는 중입니다… (26주치를 불러옵니다)</p>';
+
+    fetch('/api/fxrt-history?code=' + encodeURIComponent(code))
+      .then(r => r.json())
+      .then(d => {
+        if(!d.ok) throw new Error(d.error || '데이터를 받지 못했습니다.');
+        cache[code] = d;
+        drawChart(d);
+      })
+      .catch(err => {
+        mBody.innerHTML = '<p class="fx-state">추이를 불러오지 못했습니다. (' + err.message + ')</p>';
+      });
+  }
+
+  function drawChart(d){
+    const pts = d.points;
+    const diff = d.last - d.first;
+    const pct  = (diff / d.first) * 100;
+    const dir  = diff > 0 ? 'up' : (diff < 0 ? 'down' : '');
+    const sign = diff > 0 ? '▲ ' : (diff < 0 ? '▼ ' : '');
+
+    // ── 좌표 계산 ──
+    const W = 700, H = 300;
+    const pad = { l:56, r:18, t:18, b:34 };
+    const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b;
+    const lo = d.min, hi = d.max;
+    const span = (hi - lo) || 1;
+    const yLo = lo - span * 0.12, yHi = hi + span * 0.12;
+
+    const X = i => pad.l + (pts.length === 1 ? iw/2 : (i / (pts.length - 1)) * iw);
+    const Y = v => pad.t + ih - ((v - yLo) / (yHi - yLo)) * ih;
+
+    const line = pts.map((p,i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)},${Y(p.rate).toFixed(1)}`).join('');
+    const area = `${line}L${X(pts.length-1).toFixed(1)},${(pad.t+ih).toFixed(1)}L${X(0).toFixed(1)},${(pad.t+ih).toFixed(1)}Z`;
+
+    // 가로 격자 4줄 + y축 눈금
+    let grid = '';
+    for(let g=0; g<=3; g++){
+      const v = yLo + ((yHi - yLo) / 3) * g;
+      const y = Y(v);
+      grid += `<line class="grid-line" x1="${pad.l}" y1="${y.toFixed(1)}" x2="${W-pad.r}" y2="${y.toFixed(1)}"></line>`;
+      grid += `<text class="axis-text" x="${pad.l-9}" y="${(y+4).toFixed(1)}" text-anchor="end">${Math.round(v).toLocaleString('ko-KR')}</text>`;
+    }
+
+    // x축 날짜 (처음/중간/끝)
+    let xlab = '';
+    [0, Math.floor((pts.length-1)/2), pts.length-1].forEach(i => {
+      xlab += `<text class="axis-text" x="${X(i).toFixed(1)}" y="${H-12}" text-anchor="middle">${shortDate(pts[i].date)}</text>`;
+    });
+
+    mBody.innerHTML = `
+      <div class="fx-stats">
+        <div class="fx-stat"><span>현재</span><b>${fmtRate(d.last)}원</b></div>
+        <div class="fx-stat"><span>6개월 전</span><b>${fmtRate(d.first)}원</b></div>
+        <div class="fx-stat"><span>변동</span><b class="${dir}">${sign}${fmtRate(Math.abs(diff))}원 (${Math.abs(pct).toFixed(1)}%)</b></div>
+        <div class="fx-stat"><span>최저 / 최고</span><b>${fmtRate(d.min)} / ${fmtRate(d.max)}</b></div>
+      </div>
+      <div class="chart-wrap" id="chartWrap">
+        <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${d.code} 최근 6개월 환율 추이 꺾은선 그래프">
+          ${grid}${xlab}
+          <path class="fx-area" d="${area}"></path>
+          <path class="fx-line" d="${line}"></path>
+          <line class="cross" id="cx" y1="${pad.t}" y2="${pad.t+ih}"></line>
+          <circle class="fx-dot" id="cdot" r="5" style="opacity:0"></circle>
+        </svg>
+        <div class="tip" id="tip"></div>
+      </div>
+      <button class="tbl-toggle" id="tblBtn">숫자로 보기</button>
+      <table class="fx-table" id="fxTbl">
+        <thead><tr><th>적용일</th><th>${d.code} 환율(원)</th></tr></thead>
+        <tbody>${pts.slice().reverse().map(p =>
+          `<tr><td>${p.date.slice(0,4)}-${p.date.slice(4,6)}-${p.date.slice(6,8)}</td><td>${fmtRate(p.rate)}</td></tr>`
+        ).join('')}</tbody>
+      </table>
+    `;
+
+    // ── 호버 (크로스헤어 + 툴팁) ──
+    const wrap = document.getElementById('chartWrap');
+    const svg  = wrap.querySelector('svg');
+    const cx   = document.getElementById('cx');
+    const cdot = document.getElementById('cdot');
+    const tip  = document.getElementById('tip');
+
+    function onMove(ev){
+      const box = svg.getBoundingClientRect();
+      const sx  = (ev.clientX - box.left) / box.width * W;   // viewBox 좌표로
+      let best = 0, bd = Infinity;
+      pts.forEach((p,i) => { const dd = Math.abs(X(i) - sx); if(dd < bd){ bd = dd; best = i; } });
+
+      const px = X(best), py = Y(pts[best].rate);
+      cx.setAttribute('x1', px); cx.setAttribute('x2', px); cx.style.opacity = 1;
+      cdot.setAttribute('cx', px); cdot.setAttribute('cy', py); cdot.style.opacity = 1;
+      tip.style.opacity = 1;
+      tip.style.left = (px / W * box.width) + 'px';
+      tip.style.top  = (py / H * box.height) + 'px';
+      tip.innerHTML  = `${fmtDate(pts[best].date)}<br><b>${fmtRate(pts[best].rate)}원</b>`;
+    }
+    function onLeave(){ cx.style.opacity = 0; cdot.style.opacity = 0; tip.style.opacity = 0; }
+
+    wrap.addEventListener('pointermove', onMove);
+    wrap.addEventListener('pointerleave', onLeave);
+
+    document.getElementById('tblBtn').addEventListener('click', (e) => {
+      const t = document.getElementById('fxTbl');
+      const on = t.classList.toggle('show');
+      e.target.textContent = on ? '그래프만 보기' : '숫자로 보기';
+    });
+  }
 })();
 
 /* 스크롤 등장 애니메이션 */

@@ -4,16 +4,10 @@
 const ENDPOINT =
   'https://apis.data.go.kr/1220000/retrieveTrifFxrtInfo/getRetrieveTrifFxrtInfo';
 
-// 제빵 재료 수입과 관련 있는 통화 위주로 추린다.
+// 제빵 재료 수입에서 실제로 크게 걸리는 두 통화만 본다.
 const MAJORS = [
-  { code: 'EUR', ko: '유로',        flag: '🇪🇺', note: '프랑스 AOP 버터' },
-  { code: 'USD', ko: '미국 달러',   flag: '🇺🇸', note: '설탕 · 견과류' },
-  { code: 'JPY', ko: '일본 엔',     flag: '🇯🇵', note: '박력분 · 제과도구' },
-  { code: 'AUD', ko: '호주 달러',   flag: '🇦🇺', note: '제빵용 밀' },
-  { code: 'CAD', ko: '캐나다 달러', flag: '🇨🇦', note: '강력분 밀' },
-  { code: 'CHF', ko: '스위스 프랑', flag: '🇨🇭', note: '초콜릿' },
-  { code: 'GBP', ko: '영국 파운드', flag: '🇬🇧', note: '클로티드 크림' },
-  { code: 'CNY', ko: '중국 위안',   flag: '🇨🇳', note: '포장 자재' },
+  { code: 'USD', ko: '미국 달러', flag: '🇺🇸', note: '설탕 · 견과류 · 장비' },
+  { code: 'EUR', ko: '유로',      flag: '🇪🇺', note: '프랑스 AOP 버터 · 초콜릿' },
 ];
 
 function ymd(date) {
