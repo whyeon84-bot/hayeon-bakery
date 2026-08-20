@@ -49,10 +49,24 @@
   nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
   .brand{ font-family:var(--serif); font-size:19px; font-weight:700; text-decoration:none; white-space:nowrap; }
   .brand span{ color:var(--caramel); }
-  .navlinks{ display:flex; gap:26px; font-size:14.5px; }
-  .navlinks a{ text-decoration:none; color:var(--muted); transition:color .15s; }
-  .navlinks a:hover{ color:var(--crust); }
-  @media (max-width:720px){ .navlinks{ gap:16px; font-size:13px; } .navlinks a:nth-child(3){ display:none; } }
+  .navlinks{ display:flex; gap:6px; font-size:14.5px; flex-wrap:wrap; }
+  .navlinks a{
+    text-decoration:none; color:var(--muted); transition:color .15s, background .15s;
+    padding:7px 13px; border-radius:999px; white-space:nowrap; position:relative;
+  }
+  .navlinks a:hover{ color:var(--crust); background:rgba(139,94,52,.07); }
+  .navlinks a.active{ color:var(--crust-dark); background:var(--cream-2); font-weight:700; }
+  @media (max-width:860px){
+    nav .wrap{ height:auto; padding-block:10px; flex-direction:column; align-items:flex-start; gap:8px; }
+    .navlinks{ gap:4px; font-size:13px; width:100%; }
+    .navlinks a{ padding:6px 11px; }
+  }
+
+  /* 탭 패널 — 선택된 섹션 하나만 보인다 */
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; animation:panelIn .35s ease; }
+  @keyframes panelIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce){ .tab-panel.active{ animation:none; } }
 
   /* ---------- Hero ---------- */
   header{
@@ -350,7 +364,7 @@
   </div>
 </header>
 
-<section id="about">
+<section id="about" class="tab-panel">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="sec-num">01</span>
@@ -383,7 +397,7 @@
   </div>
 </section>
 
-<section id="works">
+<section id="works" class="tab-panel">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="sec-num">02</span>
@@ -443,7 +457,7 @@
   </div>
 </section>
 
-<section id="career">
+<section id="career" class="tab-panel">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="sec-num">03</span>
@@ -474,7 +488,7 @@
   </div>
 </section>
 
-<section id="game" class="game-sec">
+<section id="game" class="game-sec tab-panel">
   <div class="wrap">
     <div class="sec-head reveal" style="text-align:center;">
       <span class="sec-num">04</span>
@@ -524,7 +538,7 @@
   </div>
 </section>
 
-<section id="fx">
+<section id="fx" class="tab-panel">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="sec-num">05</span>
@@ -539,7 +553,7 @@
   </div>
 </section>
 
-<section id="contact" class="contact">
+<section id="contact" class="contact tab-panel">
   <div class="wrap">
     <div class="reveal">
       <span class="sec-num">06</span>
@@ -1079,6 +1093,44 @@
       e.target.textContent = on ? '그래프만 보기' : '숫자로 보기';
     });
   }
+})();
+
+/* ===========================================================
+   섹션 탭 — 고른 섹션 하나만 펼친다
+   =========================================================== */
+(function(){
+  const panels = Array.from(document.querySelectorAll('.tab-panel'));
+  if(!panels.length) return;
+  const ids     = panels.map(p => p.id);
+  const navA    = Array.from(document.querySelectorAll('.navlinks a[href^="#"]'));
+  const DEFAULT = 'about';
+
+  function show(id, remember){
+    if(!ids.includes(id)) id = DEFAULT;
+
+    panels.forEach(p => p.classList.toggle('active', p.id === id));
+    navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+
+    // 숨어 있던 동안에는 등장 애니메이션이 돌지 않으므로 여기서 바로 보이게 한다
+    const panel = document.getElementById(id);
+    panel.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+
+    if(remember && history.replaceState) history.replaceState(null, '', '#' + id);
+  }
+
+  // 메뉴와 본문 안의 이동 링크를 모두 탭 전환으로
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    const target = a.getAttribute('href').slice(1);
+    if(!ids.includes(target)) return;
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      show(target, true);
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
+  });
+
+  show((location.hash || '').replace('#',''), false);
+  window.addEventListener('hashchange', () => show(location.hash.replace('#',''), false));
 })();
 
 /* 스크롤 등장 애니메이션 */
