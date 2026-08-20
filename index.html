@@ -47,8 +47,13 @@
     border-bottom:1px solid var(--line);
   }
   nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
-  .brand{ font-family:var(--serif); font-size:19px; font-weight:700; text-decoration:none; white-space:nowrap; }
+  .brand{
+    font-family:var(--serif); font-size:19px; font-weight:700;
+    text-decoration:none; white-space:nowrap; transition:opacity .15s;
+  }
   .brand span{ color:var(--caramel); }
+  .brand:hover{ opacity:.7; }
+  .brand.home{ cursor:default; }
   .navlinks{ display:flex; gap:6px; font-size:14.5px; flex-wrap:wrap; }
   .navlinks a{
     text-decoration:none; color:var(--muted); transition:color .15s, background .15s;
@@ -346,7 +351,7 @@
   </div>
 </nav>
 
-<header id="top">
+<header id="top" class="tab-panel">
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Baker &amp; Pâtissier</span>
@@ -1103,13 +1108,15 @@
   if(!panels.length) return;
   const ids     = panels.map(p => p.id);
   const navA    = Array.from(document.querySelectorAll('.navlinks a[href^="#"]'));
-  const DEFAULT = 'about';
+  const brand   = document.querySelector('.brand');
+  const DEFAULT = 'top';   // 처음에는 첫 화면만 보여준다
 
   function show(id, remember){
     if(!ids.includes(id)) id = DEFAULT;
 
     panels.forEach(p => p.classList.toggle('active', p.id === id));
     navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    if(brand) brand.classList.toggle('home', id === 'top');
 
     // 숨어 있던 동안에는 등장 애니메이션이 돌지 않으므로 여기서 바로 보이게 한다
     const panel = document.getElementById(id);
