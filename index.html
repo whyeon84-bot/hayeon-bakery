@@ -219,6 +219,31 @@
   .links{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
   footer{ border-top:1px solid var(--line); padding:30px 0; text-align:center; font-size:13px; color:var(--muted); }
 
+  /* ---------- 환율 ---------- */
+  .fx-meta{
+    display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center;
+    font-size:13px; color:var(--muted); margin-bottom:22px;
+  }
+  .fx-badge{
+    display:inline-block; padding:4px 12px; border-radius:999px;
+    background:var(--cream-2); border:1px solid var(--line);
+    font-weight:700; color:var(--crust); font-size:12.5px;
+  }
+  .fx-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:14px; }
+  .fx-card{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:18px 20px; box-shadow:var(--shadow);
+    display:flex; flex-direction:column; gap:2px;
+  }
+  .fx-top{ display:flex; align-items:center; gap:8px; }
+  .fx-flag{ font-size:20px; line-height:1; }
+  .fx-code{ font-family:var(--serif); font-weight:700; font-size:15px; letter-spacing:.04em; }
+  .fx-ko{ font-size:12.5px; color:var(--muted); }
+  .fx-rate{ font-family:var(--serif); font-size:27px; color:var(--crust); line-height:1.2; margin-top:6px; }
+  .fx-rate small{ font-size:13px; color:var(--muted); font-family:var(--sans); margin-left:3px; }
+  .fx-note{ font-size:12px; color:var(--butter); font-weight:700; margin-top:6px; }
+  .fx-state{ color:var(--muted); font-size:14.5px; padding:18px 0; }
+
   /* reveal */
   .reveal{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in{ opacity:1; transform:none; }
@@ -235,6 +260,7 @@
       <a href="#works">대표 작품</a>
       <a href="#career">경력</a>
       <a href="#game">빵 테트리스</a>
+      <a href="#fx">재료 환율</a>
       <a href="#contact">연락</a>
     </div>
   </div>
@@ -432,10 +458,25 @@
   </div>
 </section>
 
+<section id="fx">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">05</span>
+      <h2>오늘의 재료 환율</h2>
+      <p>버터도 밀도 대부분 수입입니다. 환율이 오르면 다음 달 원가가 오릅니다. 관세청이 매주 고시하는 수입 과세환율을 그대로 가져옵니다.</p>
+    </div>
+    <div class="reveal">
+      <div class="fx-meta" id="fxMeta"></div>
+      <div class="fx-grid" id="fxGrid"></div>
+      <div class="fx-state" id="fxState">환율을 불러오는 중입니다…</div>
+    </div>
+  </div>
+</section>
+
 <section id="contact" class="contact">
   <div class="wrap">
     <div class="reveal">
-      <span class="sec-num">05</span>
+      <span class="sec-num">06</span>
       <h2>같이 구워볼까요?</h2>
       <p>클래스 문의, 협업 제안, 케이터링 주문 모두 환영합니다. 편하게 연락 주세요.</p>
       <div class="links">
@@ -774,6 +815,55 @@
   render();
   nextPiece = null;
   overlay.classList.add('show');
+})();
+
+/* ===========================================================
+   오늘의 재료 환율 (관세청 주간 관세환율)
+   키는 서버(/api/fxrt)에만 있고 여기서는 결과만 받는다.
+   =========================================================== */
+(function(){
+  const gridEl  = document.getElementById('fxGrid');
+  const metaEl  = document.getElementById('fxMeta');
+  const stateEl = document.getElementById('fxState');
+  if(!gridEl) return;
+
+  const fmtDate = (s) => (s && s.length === 8)
+    ? `${s.slice(0,4)}년 ${+s.slice(4,6)}월 ${+s.slice(6,8)}일`
+    : s;
+
+  const fmtRate = (n) =>
+    n >= 100 ? n.toLocaleString('ko-KR', { maximumFractionDigits:2 })
+             : n.toLocaleString('ko-KR', { minimumFractionDigits:2, maximumFractionDigits:4 });
+
+  fetch('/api/fxrt')
+    .then(r => r.json())
+    .then(data => {
+      if(!data.ok) throw new Error(data.error || '데이터를 받지 못했습니다.');
+
+      metaEl.innerHTML =
+        `<span class="fx-badge">${fmtDate(data.applyDate)} 적용</span>` +
+        `<span>${data.basis} · 1단위당 원(₩)</span>` +
+        `<span>출처 ${data.source}</span>`;
+
+      gridEl.innerHTML = data.rates.map(r => `
+        <div class="fx-card">
+          <div class="fx-top">
+            <span class="fx-flag">${r.flag}</span>
+            <span class="fx-code">${r.code}</span>
+            <span class="fx-ko">${r.ko}</span>
+          </div>
+          <div class="fx-rate">${fmtRate(r.rate)}<small>원</small></div>
+          <div class="fx-note">${r.note}</div>
+        </div>
+      `).join('');
+
+      stateEl.style.display = 'none';
+    })
+    .catch(err => {
+      gridEl.innerHTML = '';
+      stateEl.textContent =
+        '환율을 불러오지 못했습니다. (' + err.message + ')';
+    });
 })();
 
 /* 스크롤 등장 애니메이션 */
