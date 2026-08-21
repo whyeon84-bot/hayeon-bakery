@@ -7,22 +7,23 @@
 <meta name="description" content="설탕과 밀가루를 덜어낸 다이어트 구움과자. 파운드케이크·치즈케이크·휘낭시에와 주문 제작 다이어트 케이크.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#FFFFFF;      /* 기본 배경 */
-    --cream-2:#F4F3F0;    /* 옅은 면 */
-    --crust:#3A3A38;      /* 강조 텍스트 */
-    --crust-dark:#1A1A18; /* 가장 진한 색 */
-    --oven:#1A1A18;
-    --butter:#9A9790;     /* 라벨용 회색 */
-    --caramel:#6B6862;    /* 보조 강조 */
-    --ink:#1A1A18;
-    --muted:#8C8983;
-    --line:#E6E4DF;
-    --white:#FAFAF8;
+    --cream:#FDFBEE;      /* 크림빛 기본 배경 */
+    --cream-2:#F7F2DC;    /* 조금 더 진한 크림 */
+    --crust:#1F4A3C;      /* 딥그린 — 제목 */
+    --crust-dark:#153A2E; /* 가장 진한 그린 */
+    --oven:#153A2E;
+    --butter:#B99B54;     /* 골드 — 라벨 */
+    --caramel:#C9A961;    /* 골드 액센트 */
+    --ink:#1F4A3C;        /* 본문 그린 */
+    --muted:#6E7F72;      /* 흐린 그린그레이 */
+    --line:#E0D7B8;       /* 금빛 선 */
+    --white:#FFFDF4;
     --shadow:none;
-    --serif: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    --serif: "Cormorant Garamond", "Nanum Myeongjo", Georgia, serif;
+    --hangul: "Nanum Myeongjo", "Cormorant Garamond", Georgia, serif;
     --sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
   }
 
@@ -37,7 +38,13 @@
     line-height:1.75;
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3{ font-family:var(--serif); font-weight:600; line-height:1.3; letter-spacing:-.02em; margin:0; }
+  h1,h2,h3{ font-family:var(--hangul); font-weight:400; line-height:1.42; letter-spacing:-.01em; margin:0; color:var(--crust); }
+
+  /* 섹션 사이 금빛 장식 구분선 */
+  .ornament{ display:flex; align-items:center; justify-content:center; gap:14px; margin:0 0 30px; }
+  .ornament::before, .ornament::after{ content:""; height:1px; width:min(90px,16vw); background:linear-gradient(to right, transparent, var(--caramel)); }
+  .ornament::after{ background:linear-gradient(to left, transparent, var(--caramel)); }
+  .ornament span{ color:var(--caramel); font-size:15px; line-height:1; }
   a{ color:inherit; }
   img{ max-width:100%; }
 
@@ -46,29 +53,31 @@
   /* ---------- Nav ---------- */
   nav{
     position:sticky; top:0; z-index:50;
-    background:rgba(255,255,255,.9);
+    background:rgba(253,251,238,.92);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
   nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
   .brand{
-    font-family:var(--serif); font-size:17px; font-weight:600; letter-spacing:.02em;
-    text-decoration:none; white-space:nowrap; transition:opacity .15s; color:var(--ink);
+    font-family:var(--hangul); font-size:19px; font-weight:400; letter-spacing:.02em;
+    text-decoration:none; white-space:nowrap; transition:opacity .15s; color:var(--crust);
   }
   .brand span{
-    color:var(--muted); font-size:10.5px; letter-spacing:.16em;
-    margin-left:8px; font-weight:400;
+    font-family:var(--serif); font-style:italic;
+    color:var(--caramel); font-size:13px; letter-spacing:.08em;
+    margin-left:9px; font-weight:400;
   }
   .brand:hover{ opacity:.7; }
   .brand.home{ cursor:default; }
-  .navlinks{ display:flex; gap:26px; font-size:13.5px; flex-wrap:wrap; }
+  .navlinks{ display:flex; gap:24px; font-size:12px; flex-wrap:wrap; }
   .navlinks a{
     text-decoration:none; color:var(--muted); transition:color .15s;
-    padding:8px 2px; white-space:nowrap; position:relative; letter-spacing:.01em;
+    padding:8px 2px; white-space:nowrap; position:relative;
+    letter-spacing:.16em; font-weight:600;
   }
   .navlinks a::after{
     content:""; position:absolute; left:2px; right:2px; bottom:2px; height:1px;
-    background:var(--ink); transform:scaleX(0); transform-origin:left; transition:transform .22s ease;
+    background:var(--caramel); transform:scaleX(0); transform-origin:left; transition:transform .22s ease;
   }
   .navlinks a:hover{ color:var(--ink); }
   .navlinks a:hover::after{ transform:scaleX(1); }
@@ -94,39 +103,49 @@
   .hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(28px,5vw,60px); align-items:center; }
   @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
   .hero-photo{
-    width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:0;
+    width:100%; aspect-ratio:4/5; object-fit:cover;
+    border-radius:180px 180px 8px 8px;   /* 아르누보식 아치 */
     border:1px solid var(--line);
   }
-  @media (max-width:860px){ .hero-photo{ aspect-ratio:16/10; } }
+  @media (max-width:860px){ .hero-photo{ aspect-ratio:16/10; border-radius:120px 120px 8px 8px; } }
   .about-photo{
-    width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:0;
+    width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:8px;
     border:1px solid var(--line); box-shadow:var(--shadow); margin-bottom:14px;
   }
   .eyebrow{
-    display:inline-block;
-    font-size:11.5px; letter-spacing:.22em; text-transform:uppercase;
-    color:var(--muted); font-weight:600; margin-bottom:26px;
+    display:inline-block; font-family:var(--serif); font-style:italic;
+    font-size:15px; letter-spacing:.16em; text-transform:none;
+    color:var(--caramel); font-weight:400; margin-bottom:22px;
   }
-  header h1{ font-size:clamp(34px,5.6vw,58px); margin-bottom:24px; font-weight:600; line-height:1.32; }
-  header h1 em{ font-style:normal; color:var(--muted); }
-  .lede{ font-size:clamp(15px,1.7vw,17px); color:var(--muted); max-width:46ch; margin:0 0 38px; line-height:1.9; }
+  header h1{
+    font-family:var(--hangul); font-size:clamp(32px,5vw,52px);
+    margin-bottom:26px; font-weight:400; line-height:1.44; color:var(--crust);
+  }
+  header h1 em{
+    font-family:var(--hangul); font-weight:400;
+    color:var(--caramel); font-size:1.12em;
+  }
+  .lede{ font-size:clamp(15px,1.7vw,16.5px); color:var(--muted); max-width:44ch; margin:0 0 38px; line-height:2.05; }
   .cta{ display:flex; gap:12px; flex-wrap:wrap; }
   .btn{
-    display:inline-block; padding:14px 30px; border-radius:2px;
-    font-size:13.5px; font-weight:600; text-decoration:none; border:1px solid transparent;
-    letter-spacing:.04em; transition:background .18s, color .18s, border-color .18s;
+    display:inline-block; padding:14px 32px; border-radius:999px;
+    font-size:12.5px; font-weight:600; text-decoration:none; border:1px solid transparent;
+    letter-spacing:.14em; transition:background .2s, color .2s, border-color .2s;
   }
-  .btn-solid{ background:var(--crust-dark); color:#fff; }
-  .btn-solid:hover{ background:#000; }
-  .btn-ghost{ border-color:var(--ink); color:var(--ink); }
-  .btn-ghost:hover{ background:var(--ink); color:#fff; }
+  .btn-solid{ background:var(--crust); color:var(--cream); border-color:var(--crust); }
+  .btn-solid:hover{ background:var(--crust-dark); border-color:var(--crust-dark); }
+  .btn-ghost{ border-color:var(--caramel); color:var(--crust); }
+  .btn-ghost:hover{ background:var(--caramel); color:var(--cream); border-color:var(--caramel); }
 
   /* ---------- Sections ---------- */
   section{ padding:clamp(56px,8vw,104px) 0; }
   .sec-head{ margin-bottom:clamp(36px,5vw,56px); }
-  .sec-num{ font-size:11.5px; color:var(--butter); letter-spacing:.22em; display:block; margin-bottom:14px; text-transform:uppercase; }
-  .sec-head h2{ font-size:clamp(24px,3.2vw,34px); font-weight:600; }
-  .sec-head p{ color:var(--muted); margin:14px 0 0; max-width:52ch; font-size:15px; line-height:1.9; }
+  .sec-num{
+    font-family:var(--serif); font-style:italic; font-size:16px;
+    color:var(--caramel); letter-spacing:.1em; display:block; margin-bottom:10px; text-transform:none;
+  }
+  .sec-head h2{ font-family:var(--hangul); font-size:clamp(26px,3.4vw,38px); font-weight:400; color:var(--crust); }
+  .sec-head p{ color:var(--muted); margin:16px 0 0; max-width:52ch; font-size:15px; line-height:2.05; }
 
   /* About */
   .about{ display:grid; grid-template-columns:1.35fr 1fr; gap:clamp(28px,5vw,64px); align-items:start; }
@@ -135,7 +154,7 @@
   .about p:last-child{ margin-bottom:0; }
   .stats{ display:grid; gap:14px; }
   .stat{
-    background:var(--white); border:1px solid var(--line); border-radius:2px;
+    background:var(--white); border:1px solid var(--line); border-radius:6px;
     padding:20px 22px; box-shadow:var(--shadow);
   }
   .stat b{ display:block; font-family:var(--serif); font-size:32px; line-height:1.1; color:var(--crust); }
@@ -144,7 +163,7 @@
   /* Menu grid */
   .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(248px,1fr)); gap:20px; }
   .card{
-    background:var(--white); border:1px solid var(--line); border-radius:2px;
+    background:var(--white); border:1px solid var(--line); border-radius:6px;
     padding:0; overflow:hidden; box-shadow:var(--shadow);
     transition:transform .18s, box-shadow .18s, border-color .18s;
   }
@@ -161,23 +180,34 @@
   .card p{ margin:0; font-size:14.5px; color:var(--muted); line-height:1.7; }
 
   /* Timeline */
-  .timeline{ border-left:2px solid var(--line); padding-left:30px; display:grid; gap:34px; margin-left:6px; }
+  .timeline{ border-left:1px solid var(--line); padding-left:30px; display:grid; gap:34px; margin-left:6px; }
   .tl-item{ position:relative; }
   .tl-item::before{
     content:""; position:absolute; left:-38px; top:9px;
     width:12px; height:12px; border-radius:50%;
     background:var(--butter); border:2.5px solid var(--cream);
   }
-  .tl-year{ font-size:13px; font-weight:700; color:var(--caramel); letter-spacing:.08em; }
-  .tl-item h3{ font-size:18.5px; margin:3px 0 4px; }
+  .tl-year{ font-family:var(--serif); font-style:italic; font-size:15px; font-weight:400; color:var(--caramel); letter-spacing:.06em; }
+  .tl-item h3{ font-family:var(--hangul); font-size:19px; font-weight:400; margin:3px 0 5px; color:var(--crust); }
   .tl-item p{ margin:0; color:var(--muted); font-size:14.5px; }
 
   /* ---------- Contact / footer ---------- */
   .contact{ text-align:center; }
-  .contact h2{ font-size:clamp(28px,4.4vw,42px); margin-bottom:16px; }
-  .contact p{ color:var(--muted); margin:0 auto 32px; max-width:46ch; }
+  .contact h2{ font-family:var(--hangul); font-size:clamp(28px,4vw,40px); font-weight:400; margin-bottom:16px; }
+  .contact p{ color:var(--muted); margin:0 auto 32px; max-width:46ch; line-height:2.05; }
+  .contact .sec-num{ text-align:center; }
   .links{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-  footer{ border-top:1px solid var(--line); padding:30px 0; text-align:center; font-size:13px; color:var(--muted); }
+  footer{
+    border-top:1px solid var(--line); padding:34px 0; text-align:center;
+    font-size:12.5px; color:var(--muted); letter-spacing:.04em;
+  }
+
+  /* 섹션 라벨 아래 짧은 금선 */
+  .sec-num::after, .eyebrow::after{
+    content:""; display:block; width:34px; height:1px;
+    background:var(--caramel); margin-top:12px;
+  }
+  .contact .sec-num::after{ margin-inline:auto; }
 
   /* ---------- 메뉴 · 가격 ---------- */
   .menu-hero{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:clamp(40px,6vw,64px); }
@@ -187,13 +217,13 @@
   .menu-group{ margin-bottom:clamp(44px,6vw,72px); }
   .menu-group > h3{
     font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
-    font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink); margin-bottom:0;
+    font-weight:400; padding-bottom:14px; border-bottom:1px solid var(--caramel); margin-bottom:0; font-family:var(--serif); font-style:italic; font-size:16px; letter-spacing:.1em; text-transform:none; color:var(--caramel);
   }
   .menu-item{
     display:grid; grid-template-columns:1fr auto; gap:6px 28px;
     padding:24px 0; border-bottom:1px solid var(--line); align-items:start;
   }
-  .menu-item h4{ font-size:17px; font-weight:600; margin:0 0 8px; letter-spacing:-.01em; }
+  .menu-item h4{ font-family:var(--hangul); font-size:18px; font-weight:400; margin:0 0 8px; letter-spacing:-.01em; color:var(--crust); }
   .menu-opt{ font-size:13.5px; color:var(--muted); margin:0 0 10px; line-height:1.8; }
   .menu-nutri{ font-size:11.5px; color:var(--butter); letter-spacing:.04em; }
   .menu-price{ text-align:right; white-space:nowrap; }
@@ -215,8 +245,9 @@
 
   /* ---------- 인스타그램 피드 ---------- */
   .feed-label{
-    font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
-    font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink);
+    font-family:var(--serif); font-style:italic; font-size:17px;
+    letter-spacing:.1em; text-transform:none; color:var(--caramel);
+    font-weight:400; padding-bottom:14px; border-bottom:1px solid var(--caramel);
     margin:0 0 22px; display:block;
   }
   .reel-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:clamp(44px,6vw,68px); }
@@ -227,15 +258,15 @@
 
   .feed-item{
     position:relative; display:block; overflow:hidden; background:var(--cream-2);
-    aspect-ratio:1/1; margin:0; text-decoration:none; color:inherit;
+    aspect-ratio:1/1; margin:0; text-decoration:none; color:inherit; border-radius:6px;
   }
-  .feed-item.reel{ aspect-ratio:9/16; }
+  .feed-item.reel{ aspect-ratio:9/16; border-radius:120px 120px 6px 6px; }
   .feed-item img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
   .feed-item:hover img{ transform:scale(1.05); }
 
   .feed-cap{
     position:absolute; inset:0; padding:16px;
-    background:linear-gradient(to top, rgba(26,26,24,.82) 0%, rgba(26,26,24,.25) 45%, transparent 75%);
+    background:linear-gradient(to top, rgba(21,58,46,.86) 0%, rgba(21,58,46,.3) 45%, transparent 75%);
     color:#fff; display:flex; flex-direction:column; justify-content:flex-end; gap:6px;
     opacity:0; transition:opacity .22s;
   }
@@ -246,20 +277,20 @@
   .feed-tag{
     position:absolute; top:10px; left:10px; z-index:2;
     font-size:10px; letter-spacing:.1em; text-transform:uppercase;
-    background:rgba(255,255,255,.92); color:var(--ink);
+    background:rgba(253,251,238,.94); color:var(--crust);
     padding:4px 9px; border-radius:2px; font-weight:600;
   }
-  .feed-tag.re{ background:rgba(26,26,24,.85); color:#fff; }
-  .feed-tag.rl{ background:rgba(26,26,24,.85); color:#fff; }
+  .feed-tag.re{ background:rgba(21,58,46,.88); color:var(--cream); }
+  .feed-tag.rl{ background:rgba(21,58,46,.88); color:var(--cream); }
 
   .reel-play{
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;
-    width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,.9);
+    width:52px; height:52px; border-radius:50%; background:rgba(253,251,238,.92);
     display:flex; align-items:center; justify-content:center; transition:transform .2s;
   }
   .feed-item.reel:hover .reel-play{ transform:translate(-50%,-50%) scale(1.1); }
   .reel-play::before{
-    content:""; border-left:14px solid var(--ink);
+    content:""; border-left:14px solid var(--crust);
     border-top:9px solid transparent; border-bottom:9px solid transparent; margin-left:4px;
   }
   .feed-item.hide{ display:none; }
@@ -274,7 +305,7 @@
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top">bong베이커리 <span>less sugar</span></a>
+    <a class="brand" href="#top">bong베이커리 <span>sugar lighting</span></a>
     <div class="navlinks">
       <a href="#about">브랜드</a>
       <a href="#works">메뉴</a>
