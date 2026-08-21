@@ -282,96 +282,24 @@
   }
   .order-note b{ color:var(--ink); font-weight:600; }
 
-  /* ---------- 환율 ---------- */
-  .fx-meta{
-    display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center;
-    font-size:13px; color:var(--muted); margin-bottom:22px;
-  }
-  .fx-badge{
-    display:inline-block; padding:4px 12px; border-radius:999px;
-    background:var(--cream-2); border:1px solid var(--line);
-    font-weight:700; color:var(--crust); font-size:12.5px;
-  }
-  .fx-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:14px; }
-  .fx-card{
-    background:var(--white); border:1px solid var(--line); border-radius:2px;
-    padding:18px 20px; box-shadow:var(--shadow);
-    display:flex; flex-direction:column; gap:2px;
-  }
-  .fx-top{ display:flex; align-items:center; gap:8px; }
-  .fx-flag{ font-size:20px; line-height:1; }
-  .fx-code{ font-family:var(--serif); font-weight:700; font-size:15px; letter-spacing:.04em; }
-  .fx-ko{ font-size:12.5px; color:var(--muted); }
-  .fx-rate{ font-family:var(--serif); font-size:27px; color:var(--crust); line-height:1.2; margin-top:6px; }
-  .fx-rate small{ font-size:13px; color:var(--muted); font-family:var(--sans); margin-left:3px; }
-  .fx-note{ font-size:12px; color:var(--butter); font-weight:700; margin-top:6px; }
-  .fx-state{ color:var(--muted); font-size:14.5px; padding:18px 0; }
+  /* ---------- 상권 메모 ---------- */
+  .area-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:clamp(36px,5vw,56px); }
+  .area-cell{ background:var(--cream); padding:24px 22px; }
+  .area-cell h4{ font-size:15.5px; margin:0 0 4px; font-weight:600; }
+  .area-cell .tagline{ font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--butter); margin-bottom:12px; }
+  .area-cell ul{ margin:0; padding-left:16px; font-size:13.5px; color:var(--muted); line-height:1.95; }
+  .area-cell ul li::marker{ color:var(--line); }
+  .area-cell .good{ color:var(--ink); }
 
-  /* 클릭 가능한 환율 카드 */
-  .fx-card{
-    cursor:pointer; text-align:left; width:100%; font:inherit; color:inherit;
-    transition:transform .18s, box-shadow .18s, border-color .18s;
+  .a-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  .a-table th, .a-table td{ border-bottom:1px solid var(--line); padding:13px 10px; text-align:left; vertical-align:top; }
+  .a-table th{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap;
   }
-  .fx-card:hover, .fx-card:focus-visible{
-    transform:translateY(-3px); border-color:var(--caramel);
-    box-shadow:0 8px 20px rgba(26,26,24,.07); outline:none;
-  }
-  .fx-more{ font-size:12px; color:var(--muted); margin-top:10px; }
-  .fx-more span{ color:var(--caramel); font-weight:700; }
-
-  /* 그래프 모달 */
-  .modal{
-    position:fixed; inset:0; z-index:100; display:none;
-    align-items:center; justify-content:center; padding:20px;
-    background:rgba(56,37,26,.55); backdrop-filter:blur(3px);
-  }
-  .modal.show{ display:flex; }
-  .modal-box{
-    background:var(--white); border:1px solid var(--line); border-radius:3px;
-    width:min(760px, 100%); max-height:90vh; overflow:auto;
-    padding:clamp(20px,3.4vw,30px); box-shadow:0 24px 60px rgba(26,26,24,.22);
-  }
-  .modal-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:4px; }
-  .modal-head h3{ font-size:22px; }
-  .modal-sub{ font-size:13px; color:var(--muted); margin:2px 0 18px; }
-  .modal-x{
-    border:1px solid var(--line); background:var(--cream); color:var(--ink);
-    width:34px; height:34px; border-radius:9px; cursor:pointer; font-size:17px; line-height:1; flex:none;
-  }
-  .modal-x:hover{ background:var(--cream-2); }
-
-  .fx-stats{ display:grid; grid-template-columns:repeat(auto-fit, minmax(110px,1fr)); gap:10px; margin-bottom:18px; }
-  .fx-stat{ background:var(--cream); border:1px solid var(--line); border-radius:2px; padding:11px 13px; }
-  .fx-stat span{ display:block; font-size:11.5px; color:var(--muted); letter-spacing:.04em; }
-  .fx-stat b{ font-family:var(--serif); font-size:19px; color:var(--crust); }
-  .fx-stat b.up{ color:#B23B2E; }
-  .fx-stat b.down{ color:#2F6B4F; }
-
-  .chart-wrap{ position:relative; width:100%; }
-  .chart-wrap svg{ display:block; width:100%; height:auto; touch-action:none; }
-  .grid-line{ stroke:var(--line); stroke-width:1; }
-  .axis-text{ fill:var(--muted); font-size:11px; font-family:var(--sans); }
-  .fx-line{ fill:none; stroke:#1A1A18; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
-  .fx-area{ fill:rgba(26,26,24,.06); }
-  .fx-dot{ fill:#1A1A18; stroke:var(--white); stroke-width:2; }
-  .cross{ stroke:var(--caramel); stroke-width:1; stroke-dasharray:3 3; opacity:0; }
-  .tip{
-    position:absolute; pointer-events:none; opacity:0; transform:translate(-50%,-120%);
-    background:var(--oven); color:var(--cream); padding:7px 11px; border-radius:9px;
-    font-size:12.5px; line-height:1.5; white-space:nowrap; box-shadow:0 6px 18px rgba(0,0,0,.24);
-    transition:opacity .12s;
-  }
-  .tip b{ font-size:14px; }
-
-  .tbl-toggle{
-    margin-top:14px; background:none; border:none; color:var(--caramel);
-    font:inherit; font-size:13px; font-weight:700; cursor:pointer; padding:0; text-decoration:underline;
-  }
-  .fx-table{ width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; display:none; }
-  .fx-table.show{ display:table; }
-  .fx-table th, .fx-table td{ border-bottom:1px solid var(--line); padding:7px 8px; text-align:right; }
-  .fx-table th:first-child, .fx-table td:first-child{ text-align:left; }
-  .fx-table th{ color:var(--muted); font-weight:700; font-size:11.5px; }
+  .a-table td.blank{ color:var(--line); }
+  .table-scroll{ overflow-x:auto; }
+  .a-table .num{ text-align:right; white-space:nowrap; }
 
   /* reveal */
   .reveal{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
@@ -388,8 +316,8 @@
       <a href="#about">브랜드</a>
       <a href="#works">메뉴</a>
       <a href="#career">이야기</a>
+      <a href="#area">광교 상권</a>
       <a href="#game">빵 테트리스</a>
-      <a href="#fx">재료 환율</a>
       <a href="#contact">주문 문의</a>
     </div>
   </div>
@@ -595,6 +523,117 @@
   </div>
 </section>
 
+<section id="area" class="tab-panel">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">Location</span>
+      <h2>왜 광교인가</h2>
+      <p>매장을 낼 자리를 고르는 중입니다. 회계 하던 습관대로, 감이 아니라 표로 정리해 두고 있습니다.</p>
+    </div>
+
+    <div class="reveal">
+      <h3 style="font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink); margin-bottom:0;">
+        Candidates — 후보 입지 세 곳
+      </h3>
+      <div class="area-grid" style="margin-top:0; border-top:none;">
+        <div class="area-cell">
+          <div class="tagline">A</div>
+          <h4>광교중앙역 상업지구</h4>
+          <ul>
+            <li class="good">신분당선 역세권, 유동인구 가장 많음</li>
+            <li class="good">경기도청·법원 등 행정타운 직장 수요</li>
+            <li>임대료가 세 곳 중 가장 높음</li>
+            <li>프랜차이즈 카페·베이커리 밀집</li>
+          </ul>
+        </div>
+        <div class="area-cell">
+          <div class="tagline">B</div>
+          <h4>광교호수공원 주변</h4>
+          <ul>
+            <li class="good">주말 산책·가족 단위 방문객</li>
+            <li class="good">'운동 후 가벼운 디저트' 맥락이 자연스러움</li>
+            <li>주중 낮 시간대가 한산</li>
+            <li>날씨와 계절을 크게 탐</li>
+          </ul>
+        </div>
+        <div class="area-cell">
+          <div class="tagline">C</div>
+          <h4>아파트 단지 근린상가</h4>
+          <ul>
+            <li class="good">임대료 부담이 가장 낮음</li>
+            <li class="good">단골·예약 중심으로 굴리기 좋음</li>
+            <li>지나가다 들르는 손님이 적음</li>
+            <li>알려지는 데 시간이 걸림</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink); margin:0 0 0;">
+        Survey — 주변 빵집 조사표
+      </h3>
+      <div class="table-scroll">
+        <table class="a-table">
+          <thead>
+            <tr>
+              <th>상호</th><th>유형</th><th>거리</th><th>가격대</th><th>저당 메뉴</th><th>메모</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="6" style="padding:26px 10px; color:var(--muted);">
+              아직 채우지 않았습니다. 아래 방법으로 직접 돌아보며 채울 칸입니다.
+            </td></tr>
+            <tr><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+            <tr><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+            <tr><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="order-note" style="margin-top:26px;">
+        <b>조사 방법 메모</b><br>
+        후보지 반경 1km를 걸어 돌면서 ① 상호 ② 프랜차이즈인지 개인 매장인지 ③ 도보 거리
+        ④ 대표 메뉴 가격 ⑤ <b>저당·글루텐프리 메뉴를 파는지</b>를 적습니다.<br>
+        마지막 항목이 핵심입니다. 일반 베이커리는 경쟁 상대가 아니지만,
+        <b>저당 메뉴를 이미 파는 곳은 직접 경쟁</b>이기 때문입니다.<br>
+        <span style="color:var(--butter);">※ 공공데이터포털의 빵집 API 승인이 반영되면 이 표를 자동으로 채우도록 연결할 예정입니다. (2026-08-21 기준 미반영)</span>
+      </div>
+
+      <h3 style="font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink); margin:clamp(44px,6vw,64px) 0 0;">
+        Positioning — 어디에 설 것인가
+      </h3>
+      <div class="menu-item">
+        <div>
+          <h4>일반 베이커리와 싸우지 않는다</h4>
+          <p class="menu-opt">
+            빵이 먹고 싶은 사람은 이미 갈 곳이 많습니다. 우리 손님은
+            <strong>먹으면 안 된다고 생각하면서도 먹고 싶은 사람</strong>입니다.
+            비교 대상은 옆집 빵집이 아니라 '참기'입니다.
+          </p>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <h4>운동하는 곳 옆에 붙는다</h4>
+          <p class="menu-opt">
+            헬스장 · 필라테스 · 요가원 · 한의원 다이어트 클리닉과 제휴합니다.
+            회원 할인을 주고, 대신 그곳에 메뉴판을 둡니다. 광고비보다 싸고 타깃이 정확합니다.
+          </p>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <h4>예약을 기본으로 한다</h4>
+          <p class="menu-opt">
+            저당 재료는 일반 재료보다 비쌉니다. 남기면 그대로 손실입니다.
+            케이크는 3일 전 예약, 구움과자는 요일별 정량 생산으로
+            <strong>폐기율을 먼저 잡고 시작합니다.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="game" class="game-sec tab-panel">
   <div class="wrap">
     <div class="sec-head reveal" style="text-align:center;">
@@ -645,20 +684,6 @@
   </div>
 </section>
 
-<section id="fx" class="tab-panel">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-num">Ingredients</span>
-      <h2>오늘의 재료 환율</h2>
-      <p>아몬드가루도 알룰로스도 대부분 수입입니다. 환율이 오르면 다음 달 원가가 오릅니다. 관세청이 매주 고시하는 수입 과세환율이며, <strong>카드를 누르면 최근 6개월 추이</strong>를 볼 수 있습니다.</p>
-    </div>
-    <div class="reveal">
-      <div class="fx-meta" id="fxMeta"></div>
-      <div class="fx-grid" id="fxGrid"></div>
-      <div class="fx-state" id="fxState">환율을 불러오는 중입니다…</div>
-    </div>
-  </div>
-</section>
 
 <section id="contact" class="contact tab-panel">
   <div class="wrap">
@@ -675,19 +700,6 @@
     </div>
   </div>
 </section>
-
-<div class="modal" id="fxModal" role="dialog" aria-modal="true" aria-labelledby="fxmTitle">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div>
-        <h3 id="fxmTitle">환율 추이</h3>
-        <p class="modal-sub" id="fxmSub">최근 6개월 · 관세청 주간 고시</p>
-      </div>
-      <button class="modal-x" id="fxmClose" aria-label="닫기">✕</button>
-    </div>
-    <div id="fxmBody"></div>
-  </div>
-</div>
 
 <footer>© 2026 HAYEON less sugar · 원하연 &nbsp;|&nbsp; 설탕을 덜고, 맛은 남깁니다.</footer>
 
@@ -1018,190 +1030,6 @@
   overlay.classList.add('show');
 })();
 
-/* ===========================================================
-   오늘의 재료 환율 (관세청 주간 관세환율)
-   키는 서버(/api/fxrt)에만 있고 여기서는 결과만 받는다.
-   =========================================================== */
-(function(){
-  const gridEl  = document.getElementById('fxGrid');
-  const metaEl  = document.getElementById('fxMeta');
-  const stateEl = document.getElementById('fxState');
-  if(!gridEl) return;
-
-  const fmtDate = (s) => (s && s.length === 8)
-    ? `${s.slice(0,4)}년 ${+s.slice(4,6)}월 ${+s.slice(6,8)}일`
-    : s;
-
-  const fmtRate = (n) =>
-    n >= 100 ? n.toLocaleString('ko-KR', { maximumFractionDigits:2 })
-             : n.toLocaleString('ko-KR', { minimumFractionDigits:2, maximumFractionDigits:4 });
-
-  fetch('/api/fxrt')
-    .then(r => r.json())
-    .then(data => {
-      if(!data.ok) throw new Error(data.error || '데이터를 받지 못했습니다.');
-
-      metaEl.innerHTML =
-        `<span class="fx-badge">${fmtDate(data.applyDate)} 적용</span>` +
-        `<span>${data.basis} · 1단위당 원(₩)</span>` +
-        `<span>출처 ${data.source}</span>`;
-
-      gridEl.innerHTML = data.rates.map(r => `
-        <button class="fx-card" data-code="${r.code}" data-ko="${r.ko}">
-          <div class="fx-top">
-            <span class="fx-flag">${r.flag}</span>
-            <span class="fx-code">${r.code}</span>
-            <span class="fx-ko">${r.ko}</span>
-          </div>
-          <div class="fx-rate">${fmtRate(r.rate)}<small>원</small></div>
-          <div class="fx-note">${r.note}</div>
-          <div class="fx-more"><span>6개월 추이 보기 →</span></div>
-        </button>
-      `).join('');
-
-      gridEl.querySelectorAll('.fx-card').forEach(btn => {
-        btn.addEventListener('click', () => openChart(btn.dataset.code, btn.dataset.ko));
-      });
-
-      stateEl.style.display = 'none';
-    })
-    .catch(err => {
-      gridEl.innerHTML = '';
-      stateEl.textContent =
-        '환율을 불러오지 못했습니다. (' + err.message + ')';
-    });
-
-  /* ---------- 6개월 추이 그래프 ---------- */
-  const modal   = document.getElementById('fxModal');
-  const mTitle  = document.getElementById('fxmTitle');
-  const mSub    = document.getElementById('fxmSub');
-  const mBody   = document.getElementById('fxmBody');
-  const mClose  = document.getElementById('fxmClose');
-  const cache   = {};
-
-  function closeModal(){ modal.classList.remove('show'); }
-  mClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
-
-  const shortDate = (s) => `${+s.slice(4,6)}/${+s.slice(6,8)}`;
-
-  function openChart(code, ko){
-    modal.classList.add('show');
-    mTitle.textContent = `${code} ${ko} · 6개월 추이`;
-    mSub.textContent = '최근 6개월 · 관세청 주간 고시 (수입 과세환율)';
-    mClose.focus();
-
-    if(cache[code]){ drawChart(cache[code]); return; }
-    mBody.innerHTML = '<p class="fx-state">그래프를 그리는 중입니다… (26주치를 불러옵니다)</p>';
-
-    fetch('/api/fxrt-history?code=' + encodeURIComponent(code))
-      .then(r => r.json())
-      .then(d => {
-        if(!d.ok) throw new Error(d.error || '데이터를 받지 못했습니다.');
-        cache[code] = d;
-        drawChart(d);
-      })
-      .catch(err => {
-        mBody.innerHTML = '<p class="fx-state">추이를 불러오지 못했습니다. (' + err.message + ')</p>';
-      });
-  }
-
-  function drawChart(d){
-    const pts = d.points;
-    const diff = d.last - d.first;
-    const pct  = (diff / d.first) * 100;
-    const dir  = diff > 0 ? 'up' : (diff < 0 ? 'down' : '');
-    const sign = diff > 0 ? '▲ ' : (diff < 0 ? '▼ ' : '');
-
-    // ── 좌표 계산 ──
-    const W = 700, H = 300;
-    const pad = { l:56, r:18, t:18, b:34 };
-    const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b;
-    const lo = d.min, hi = d.max;
-    const span = (hi - lo) || 1;
-    const yLo = lo - span * 0.12, yHi = hi + span * 0.12;
-
-    const X = i => pad.l + (pts.length === 1 ? iw/2 : (i / (pts.length - 1)) * iw);
-    const Y = v => pad.t + ih - ((v - yLo) / (yHi - yLo)) * ih;
-
-    const line = pts.map((p,i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)},${Y(p.rate).toFixed(1)}`).join('');
-    const area = `${line}L${X(pts.length-1).toFixed(1)},${(pad.t+ih).toFixed(1)}L${X(0).toFixed(1)},${(pad.t+ih).toFixed(1)}Z`;
-
-    // 가로 격자 4줄 + y축 눈금
-    let grid = '';
-    for(let g=0; g<=3; g++){
-      const v = yLo + ((yHi - yLo) / 3) * g;
-      const y = Y(v);
-      grid += `<line class="grid-line" x1="${pad.l}" y1="${y.toFixed(1)}" x2="${W-pad.r}" y2="${y.toFixed(1)}"></line>`;
-      grid += `<text class="axis-text" x="${pad.l-9}" y="${(y+4).toFixed(1)}" text-anchor="end">${Math.round(v).toLocaleString('ko-KR')}</text>`;
-    }
-
-    // x축 날짜 (처음/중간/끝)
-    let xlab = '';
-    [0, Math.floor((pts.length-1)/2), pts.length-1].forEach(i => {
-      xlab += `<text class="axis-text" x="${X(i).toFixed(1)}" y="${H-12}" text-anchor="middle">${shortDate(pts[i].date)}</text>`;
-    });
-
-    mBody.innerHTML = `
-      <div class="fx-stats">
-        <div class="fx-stat"><span>현재</span><b>${fmtRate(d.last)}원</b></div>
-        <div class="fx-stat"><span>6개월 전</span><b>${fmtRate(d.first)}원</b></div>
-        <div class="fx-stat"><span>변동</span><b class="${dir}">${sign}${fmtRate(Math.abs(diff))}원 (${Math.abs(pct).toFixed(1)}%)</b></div>
-        <div class="fx-stat"><span>최저 / 최고</span><b>${fmtRate(d.min)} / ${fmtRate(d.max)}</b></div>
-      </div>
-      <div class="chart-wrap" id="chartWrap">
-        <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${d.code} 최근 6개월 환율 추이 꺾은선 그래프">
-          ${grid}${xlab}
-          <path class="fx-area" d="${area}"></path>
-          <path class="fx-line" d="${line}"></path>
-          <line class="cross" id="cx" y1="${pad.t}" y2="${pad.t+ih}"></line>
-          <circle class="fx-dot" id="cdot" r="5" style="opacity:0"></circle>
-        </svg>
-        <div class="tip" id="tip"></div>
-      </div>
-      <button class="tbl-toggle" id="tblBtn">숫자로 보기</button>
-      <table class="fx-table" id="fxTbl">
-        <thead><tr><th>적용일</th><th>${d.code} 환율(원)</th></tr></thead>
-        <tbody>${pts.slice().reverse().map(p =>
-          `<tr><td>${p.date.slice(0,4)}-${p.date.slice(4,6)}-${p.date.slice(6,8)}</td><td>${fmtRate(p.rate)}</td></tr>`
-        ).join('')}</tbody>
-      </table>
-    `;
-
-    // ── 호버 (크로스헤어 + 툴팁) ──
-    const wrap = document.getElementById('chartWrap');
-    const svg  = wrap.querySelector('svg');
-    const cx   = document.getElementById('cx');
-    const cdot = document.getElementById('cdot');
-    const tip  = document.getElementById('tip');
-
-    function onMove(ev){
-      const box = svg.getBoundingClientRect();
-      const sx  = (ev.clientX - box.left) / box.width * W;   // viewBox 좌표로
-      let best = 0, bd = Infinity;
-      pts.forEach((p,i) => { const dd = Math.abs(X(i) - sx); if(dd < bd){ bd = dd; best = i; } });
-
-      const px = X(best), py = Y(pts[best].rate);
-      cx.setAttribute('x1', px); cx.setAttribute('x2', px); cx.style.opacity = 1;
-      cdot.setAttribute('cx', px); cdot.setAttribute('cy', py); cdot.style.opacity = 1;
-      tip.style.opacity = 1;
-      tip.style.left = (px / W * box.width) + 'px';
-      tip.style.top  = (py / H * box.height) + 'px';
-      tip.innerHTML  = `${fmtDate(pts[best].date)}<br><b>${fmtRate(pts[best].rate)}원</b>`;
-    }
-    function onLeave(){ cx.style.opacity = 0; cdot.style.opacity = 0; tip.style.opacity = 0; }
-
-    wrap.addEventListener('pointermove', onMove);
-    wrap.addEventListener('pointerleave', onLeave);
-
-    document.getElementById('tblBtn').addEventListener('click', (e) => {
-      const t = document.getElementById('fxTbl');
-      const on = t.classList.toggle('show');
-      e.target.textContent = on ? '그래프만 보기' : '숫자로 보기';
-    });
-  }
-})();
 
 /* ===========================================================
    섹션 탭 — 고른 섹션 하나만 펼친다
