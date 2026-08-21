@@ -244,16 +244,11 @@
   .order-note b{ color:var(--ink); font-weight:600; }
 
   /* ---------- 인스타그램 피드 ---------- */
-  /* 어두운 톤의 피드 — 여백 없이 촘촘하게 */
-  #feed{ background:var(--crust-dark); }
-  #feed .sec-head h2, #feed .feed-label{ color:#F0E9D2; }
-  #feed .sec-head p{ color:rgba(240,233,210,.62); }
-  #feed .sec-num{ color:var(--caramel); }
-
+  /* 피드 — 사진은 어둡게, 배경은 다른 페이지와 같은 크림빛 */
   .feed-label{
     font-family:var(--serif); font-style:italic; font-size:17px;
-    letter-spacing:.1em; text-transform:none;
-    font-weight:400; padding-bottom:13px; border-bottom:1px solid rgba(201,169,97,.45);
+    letter-spacing:.1em; text-transform:none; color:var(--caramel);
+    font-weight:400; padding-bottom:13px; border-bottom:1px solid var(--caramel);
     margin:0 0 14px; display:block;
   }
   .reel-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-bottom:clamp(40px,5vw,60px); }
@@ -261,7 +256,7 @@
   @media (max-width:720px){ .feed-grid{ grid-template-columns:repeat(2,1fr); } }
 
   .feed-item{
-    position:relative; display:block; overflow:hidden; background:#0F2A21;
+    position:relative; display:block; overflow:hidden; background:var(--cream-2);
     aspect-ratio:1/1; margin:0; text-decoration:none; color:inherit; border-radius:0;
   }
   .feed-item.reel{ aspect-ratio:4/5; border-radius:0; }
