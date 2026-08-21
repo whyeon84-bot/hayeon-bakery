@@ -213,24 +213,57 @@
   }
   .order-note b{ color:var(--ink); font-weight:600; }
 
-  /* ---------- 상권 메모 ---------- */
-  .area-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:clamp(36px,5vw,56px); }
-  .area-cell{ background:var(--cream); padding:24px 22px; }
-  .area-cell h4{ font-size:15.5px; margin:0 0 4px; font-weight:600; }
-  .area-cell .tagline{ font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--butter); margin-bottom:12px; }
-  .area-cell ul{ margin:0; padding-left:16px; font-size:13.5px; color:var(--muted); line-height:1.95; }
-  .area-cell ul li::marker{ color:var(--line); }
-  .area-cell .good{ color:var(--ink); }
-
-  .a-table{ width:100%; border-collapse:collapse; font-size:13.5px; }
-  .a-table th, .a-table td{ border-bottom:1px solid var(--line); padding:13px 10px; text-align:left; vertical-align:top; }
-  .a-table th{
-    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap;
+  /* ---------- 인스타그램 피드 ---------- */
+  .feed-filter{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:26px; }
+  .feed-filter button{
+    background:none; border:1px solid var(--line); color:var(--muted);
+    font:inherit; font-size:12.5px; letter-spacing:.02em; padding:8px 16px;
+    border-radius:2px; cursor:pointer; transition:all .16s;
   }
-  .a-table td.blank{ color:var(--line); }
-  .table-scroll{ overflow-x:auto; }
-  .a-table .num{ text-align:right; white-space:nowrap; }
+  .feed-filter button:hover{ border-color:var(--ink); color:var(--ink); }
+  .feed-filter button.on{ background:var(--ink); border-color:var(--ink); color:#fff; }
+
+  .feed-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  @media (max-width:720px){ .feed-grid{ grid-template-columns:repeat(2,1fr); gap:8px; } }
+
+  .feed-item{
+    position:relative; display:block; overflow:hidden; background:var(--cream-2);
+    aspect-ratio:1/1; margin:0; text-decoration:none; color:inherit;
+  }
+  .feed-item.reel{ aspect-ratio:9/16; }
+  .feed-item img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+  .feed-item:hover img{ transform:scale(1.05); }
+
+  .feed-cap{
+    position:absolute; inset:0; padding:16px;
+    background:linear-gradient(to top, rgba(26,26,24,.82) 0%, rgba(26,26,24,.25) 45%, transparent 75%);
+    color:#fff; display:flex; flex-direction:column; justify-content:flex-end; gap:6px;
+    opacity:0; transition:opacity .22s;
+  }
+  .feed-item:hover .feed-cap, .feed-item:focus-visible .feed-cap{ opacity:1; }
+  .feed-cap p{ margin:0; font-size:12.5px; line-height:1.6; }
+  .feed-src{ font-size:11px; opacity:.8; }
+
+  .feed-tag{
+    position:absolute; top:10px; left:10px; z-index:2;
+    font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+    background:rgba(255,255,255,.92); color:var(--ink);
+    padding:4px 9px; border-radius:2px; font-weight:600;
+  }
+  .feed-tag.re{ background:rgba(26,26,24,.85); color:#fff; }
+  .feed-tag.rl{ background:rgba(26,26,24,.85); color:#fff; }
+
+  .reel-play{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;
+    width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,.9);
+    display:flex; align-items:center; justify-content:center; transition:transform .2s;
+  }
+  .feed-item.reel:hover .reel-play{ transform:translate(-50%,-50%) scale(1.1); }
+  .reel-play::before{
+    content:""; border-left:14px solid var(--ink);
+    border-top:9px solid transparent; border-bottom:9px solid transparent; margin-left:4px;
+  }
+  .feed-item.hide{ display:none; }
 
   /* reveal */
   .reveal{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
@@ -247,7 +280,7 @@
       <a href="#about">브랜드</a>
       <a href="#works">메뉴</a>
       <a href="#career">이야기</a>
-      <a href="#area">광교 상권</a>
+      <a href="#feed">인스타그램</a>
       <a href="#contact">주문 문의</a>
     </div>
   </div>
@@ -448,112 +481,111 @@
   </div>
 </section>
 
-<section id="area" class="tab-panel">
+<section id="feed" class="tab-panel">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-num">Location</span>
-      <h2>왜 광교인가</h2>
-      <p>매장을 낼 자리를 고르는 중입니다. 회계 하던 습관대로, 감이 아니라 표로 정리해 두고 있습니다.</p>
+      <span class="sec-num">Instagram</span>
+      <h2>@bong_bakery</h2>
+      <p>구운 것, 실패한 것, 손님이 올려주신 것. 매일 조금씩 기록합니다.</p>
     </div>
 
     <div class="reveal">
-      <h3 style="font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink); margin-bottom:0;">
-        Candidates — 후보 입지 세 곳
-      </h3>
-      <div class="area-grid" style="margin-top:0; border-top:none;">
-        <div class="area-cell">
-          <div class="tagline">A</div>
-          <h4>광교중앙역 상업지구</h4>
-          <ul>
-            <li class="good">신분당선 역세권, 유동인구 가장 많음</li>
-            <li class="good">경기도청·법원 등 행정타운 직장 수요</li>
-            <li>임대료가 세 곳 중 가장 높음</li>
-            <li>프랜차이즈 카페·베이커리 밀집</li>
-          </ul>
-        </div>
-        <div class="area-cell">
-          <div class="tagline">B</div>
-          <h4>광교호수공원 주변</h4>
-          <ul>
-            <li class="good">주말 산책·가족 단위 방문객</li>
-            <li class="good">'운동 후 가벼운 디저트' 맥락이 자연스러움</li>
-            <li>주중 낮 시간대가 한산</li>
-            <li>날씨와 계절을 크게 탐</li>
-          </ul>
-        </div>
-        <div class="area-cell">
-          <div class="tagline">C</div>
-          <h4>아파트 단지 근린상가</h4>
-          <ul>
-            <li class="good">임대료 부담이 가장 낮음</li>
-            <li class="good">단골·예약 중심으로 굴리기 좋음</li>
-            <li>지나가다 들르는 손님이 적음</li>
-            <li>알려지는 데 시간이 걸림</li>
-          </ul>
-        </div>
+      <div class="feed-filter" id="feedFilter">
+        <button class="on" data-f="all">전체</button>
+        <button data-f="mine">직접 만든 것</button>
+        <button data-f="regram">리그램</button>
+        <button data-f="reel">릴스</button>
       </div>
 
-      <h3 style="font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink); margin:0 0 0;">
-        Survey — 주변 빵집 조사표
-      </h3>
-      <div class="table-scroll">
-        <table class="a-table">
-          <thead>
-            <tr>
-              <th>상호</th><th>유형</th><th>거리</th><th>가격대</th><th>저당 메뉴</th><th>메모</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td colspan="6" style="padding:26px 10px; color:var(--muted);">
-              아직 채우지 않았습니다. 아래 방법으로 직접 돌아보며 채울 칸입니다.
-            </td></tr>
-            <tr><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
-            <tr><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
-            <tr><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td></tr>
-          </tbody>
-        </table>
+      <div class="feed-grid" id="feedGrid">
+        <figure class="feed-item" data-type="mine">
+          <span class="feed-tag">직접</span>
+          <img src="img/g2.jpg" alt="통곡물 파운드케이크를 잘라놓은 모습" loading="lazy">
+          <div class="feed-cap"><p>오트가루 파운드, 스무 번째 배합.<br>이번엔 안 퍽퍽함 ✔</p></div>
+        </figure>
+
+        <figure class="feed-item" data-type="mine">
+          <span class="feed-tag">직접</span>
+          <img src="img/mood1.jpg" alt="저당 바스크 치즈케이크 한 조각" loading="lazy">
+          <div class="feed-cap"><p>바스크 치즈케이크. 설탕 0g, 알룰로스로만.</p></div>
+        </figure>
+
+        <figure class="feed-item" data-type="mine">
+          <span class="feed-tag">직접</span>
+          <img src="img/g1.jpg" alt="갓 구운 통곡물 빵 세 덩이" loading="lazy">
+          <div class="feed-cap"><p>새벽 4시 반죽, 7시 출근 전 굽기.<br>회사 다닐 때 루틴이었습니다.</p></div>
+        </figure>
+
+        <figure class="feed-item" data-type="regram">
+          <span class="feed-tag re">리그램</span>
+          <img src="img/mood3.jpg" alt="손님이 올려주신 블루베리 치즈케이크" loading="lazy">
+          <div class="feed-cap">
+            <p>다이어트 중인데 죄책감 없이 먹었다는 후기 🥹</p>
+            <span class="feed-src">Repost · @출처_계정</span>
+          </div>
+        </figure>
+
+        <figure class="feed-item" data-type="regram">
+          <span class="feed-tag re">리그램</span>
+          <img src="img/mood2.jpg" alt="손님이 올려주신 디저트 사진" loading="lazy">
+          <div class="feed-cap">
+            <p>필라테스 끝나고 들러주셨어요.</p>
+            <span class="feed-src">Repost · @출처_계정</span>
+          </div>
+        </figure>
+
+        <figure class="feed-item" data-type="regram">
+          <span class="feed-tag re">리그램</span>
+          <img src="img/g4.jpg" alt="매장에서 손님이 찍은 사진" loading="lazy">
+          <div class="feed-cap">
+            <p>진열대 사진 감사합니다 :)</p>
+            <span class="feed-src">Repost · @출처_계정</span>
+          </div>
+        </figure>
+
+        <a class="feed-item reel" data-type="reel" href="#" rel="noopener">
+          <span class="feed-tag rl">릴스</span>
+          <span class="reel-play"></span>
+          <img src="img/g3.jpg" alt="휘낭시에 반죽 붓는 장면" loading="lazy">
+          <div class="feed-cap"><p>휘낭시에 반죽 붓기<br>· 30초</p></div>
+        </a>
+
+        <a class="feed-item reel" data-type="reel" href="#" rel="noopener">
+          <span class="feed-tag rl">릴스</span>
+          <span class="reel-play"></span>
+          <img src="img/g5.jpg" alt="케이크 아이싱 장면" loading="lazy">
+          <div class="feed-cap"><p>저당 크림 아이싱<br>· 45초</p></div>
+        </a>
+
+        <a class="feed-item reel" data-type="reel" href="#" rel="noopener">
+          <span class="feed-tag rl">릴스</span>
+          <span class="reel-play"></span>
+          <img src="img/g6.jpg" alt="초콜릿 케이크 만드는 장면" loading="lazy">
+          <div class="feed-cap"><p>카카오닙스 올리기<br>· 20초</p></div>
+        </a>
       </div>
 
-      <div class="order-note" style="margin-top:26px;">
-        <b>조사 방법 메모</b><br>
-        후보지 반경 1km를 걸어 돌면서 ① 상호 ② 프랜차이즈인지 개인 매장인지 ③ 도보 거리
-        ④ 대표 메뉴 가격 ⑤ <b>저당·글루텐프리 메뉴를 파는지</b>를 적습니다.<br>
-        마지막 항목이 핵심입니다. 일반 베이커리는 경쟁 상대가 아니지만,
-        <b>저당 메뉴를 이미 파는 곳은 직접 경쟁</b>이기 때문입니다.<br>
-        <span style="color:var(--butter);">※ 공공데이터포털의 빵집 API 승인이 반영되면 이 표를 자동으로 채우도록 연결할 예정입니다. (2026-08-21 기준 미반영)</span>
+      <div class="order-note" style="margin-top:28px;">
+        <b>이 페이지를 실제 인스타와 연결하려면</b><br>
+        지금 보이는 사진과 문구는 <b>자리를 잡아둔 예시</b>입니다. 다음 두 가지만 주시면 바로 진짜로 바꿔 드립니다.<br>
+        ① 직접 찍으신 사진 파일 &nbsp;② 릴스 게시물 주소(인스타에서 '링크 복사')<br>
+        <span style="color:var(--butter);">※ 리그램 사진은 올려주신 분의 계정을 반드시 함께 표기해야 합니다. 지금은 <b>@출처_계정</b> 자리로 비워두었습니다.</span>
       </div>
+    </div>
+  </div>
+</section>
 
-      <h3 style="font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink); margin:clamp(44px,6vw,64px) 0 0;">
-        Positioning — 어디에 설 것인가
-      </h3>
-      <div class="menu-item">
-        <div>
-          <h4>일반 베이커리와 싸우지 않는다</h4>
-          <p class="menu-opt">
-            빵이 먹고 싶은 사람은 이미 갈 곳이 많습니다. 우리 손님은
-            <strong>먹으면 안 된다고 생각하면서도 먹고 싶은 사람</strong>입니다.
-            비교 대상은 옆집 빵집이 아니라 '참기'입니다.
-          </p>
-        </div>
-      </div>
-      <div class="menu-item">
-        <div>
-          <h4>운동하는 곳 옆에 붙는다</h4>
-          <p class="menu-opt">
-            헬스장 · 필라테스 · 요가원 · 한의원 다이어트 클리닉과 제휴합니다.
-            회원 할인을 주고, 대신 그곳에 메뉴판을 둡니다. 광고비보다 싸고 타깃이 정확합니다.
-          </p>
-        </div>
-      </div>
-      <div class="menu-item">
-        <div>
-          <h4>예약을 기본으로 한다</h4>
-          <p class="menu-opt">
-            저당 재료는 일반 재료보다 비쌉니다. 남기면 그대로 손실입니다.
-            케이크는 3일 전 예약, 구움과자는 요일별 정량 생산으로
-            <strong>폐기율을 먼저 잡고 시작합니다.</strong>
-          </p>
-        </div>
+<section id="contact" class="contact tab-panel">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="sec-num">Contact</span>
+      <h2>주문 문의</h2>
+      <p>케이크 주문은 수령 3일 전까지, 구움과자는 당일 재고 확인 후 안내드립니다.
+         알레르기나 원하시는 당도가 있으면 함께 적어주세요.</p>
+      <div class="links">
+        <a class="btn btn-solid" href="mailto:whyeon84@gmail.com">whyeon84@gmail.com</a>
+        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">카카오톡 채널</a>
       </div>
     </div>
   </div>
@@ -562,6 +594,24 @@
 <footer>© 2026 bong베이커리 · 원하연 &nbsp;|&nbsp; 설탕을 덜고, 맛은 남깁니다.</footer>
 
 <script>
+/* ===========================================================
+   인스타 피드 — 전체 / 직접 / 리그램 / 릴스 걸러 보기
+   =========================================================== */
+(function(){
+  const bar = document.getElementById('feedFilter');
+  const grid = document.getElementById('feedGrid');
+  if(!bar || !grid) return;
+  const items = Array.from(grid.children);
+
+  bar.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if(!btn) return;
+    const f = btn.dataset.f;
+    bar.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === btn));
+    items.forEach(el => el.classList.toggle('hide', f !== 'all' && el.dataset.type !== f));
+  });
+})();
+
 /* ===========================================================
    섹션 탭 — 고른 섹션 하나만 펼친다
    =========================================================== */
