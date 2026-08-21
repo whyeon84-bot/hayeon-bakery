@@ -214,14 +214,13 @@
   .order-note b{ color:var(--ink); font-weight:600; }
 
   /* ---------- 인스타그램 피드 ---------- */
-  .feed-filter{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:26px; }
-  .feed-filter button{
-    background:none; border:1px solid var(--line); color:var(--muted);
-    font:inherit; font-size:12.5px; letter-spacing:.02em; padding:8px 16px;
-    border-radius:2px; cursor:pointer; transition:all .16s;
+  .feed-label{
+    font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
+    font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink);
+    margin:0 0 22px; display:block;
   }
-  .feed-filter button:hover{ border-color:var(--ink); color:var(--ink); }
-  .feed-filter button.on{ background:var(--ink); border-color:var(--ink); color:#fff; }
+  .reel-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:clamp(44px,6vw,68px); }
+  @media (max-width:720px){ .reel-row{ gap:8px; } }
 
   .feed-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
   @media (max-width:720px){ .feed-grid{ grid-template-columns:repeat(2,1fr); gap:8px; } }
@@ -490,86 +489,61 @@
     </div>
 
     <div class="reveal">
-      <div class="feed-filter" id="feedFilter">
-        <button class="on" data-f="all">전체</button>
-        <button data-f="mine">직접 만든 것</button>
-        <button data-f="regram">리그램</button>
-        <button data-f="reel">릴스</button>
-      </div>
-
-      <div class="feed-grid" id="feedGrid">
-        <figure class="feed-item" data-type="mine">
-          <span class="feed-tag">직접</span>
-          <img src="img/g2.jpg" alt="통곡물 파운드케이크를 잘라놓은 모습" loading="lazy">
-          <div class="feed-cap"><p>오트가루 파운드, 스무 번째 배합.<br>이번엔 안 퍽퍽함 ✔</p></div>
-        </figure>
-
-        <figure class="feed-item" data-type="mine">
-          <span class="feed-tag">직접</span>
-          <img src="img/mood1.jpg" alt="저당 바스크 치즈케이크 한 조각" loading="lazy">
-          <div class="feed-cap"><p>바스크 치즈케이크. 설탕 0g, 알룰로스로만.</p></div>
-        </figure>
-
-        <figure class="feed-item" data-type="mine">
-          <span class="feed-tag">직접</span>
-          <img src="img/g1.jpg" alt="갓 구운 통곡물 빵 세 덩이" loading="lazy">
-          <div class="feed-cap"><p>새벽 4시 반죽, 7시 출근 전 굽기.<br>회사 다닐 때 루틴이었습니다.</p></div>
-        </figure>
-
-        <figure class="feed-item" data-type="regram">
-          <span class="feed-tag re">리그램</span>
-          <img src="img/mood3.jpg" alt="손님이 올려주신 블루베리 치즈케이크" loading="lazy">
-          <div class="feed-cap">
-            <p>다이어트 중인데 죄책감 없이 먹었다는 후기 🥹</p>
-            <span class="feed-src">Repost · @출처_계정</span>
-          </div>
-        </figure>
-
-        <figure class="feed-item" data-type="regram">
-          <span class="feed-tag re">리그램</span>
-          <img src="img/mood2.jpg" alt="손님이 올려주신 디저트 사진" loading="lazy">
-          <div class="feed-cap">
-            <p>필라테스 끝나고 들러주셨어요.</p>
-            <span class="feed-src">Repost · @출처_계정</span>
-          </div>
-        </figure>
-
-        <figure class="feed-item" data-type="regram">
-          <span class="feed-tag re">리그램</span>
-          <img src="img/g4.jpg" alt="매장에서 손님이 찍은 사진" loading="lazy">
-          <div class="feed-cap">
-            <p>진열대 사진 감사합니다 :)</p>
-            <span class="feed-src">Repost · @출처_계정</span>
-          </div>
-        </figure>
-
-        <a class="feed-item reel" data-type="reel" href="#" rel="noopener">
+      <span class="feed-label">Reels — 베이킹 영상</span>
+      <div class="reel-row">
+        <a class="feed-item reel" href="#" rel="noopener">
           <span class="feed-tag rl">릴스</span>
           <span class="reel-play"></span>
-          <img src="img/g3.jpg" alt="휘낭시에 반죽 붓는 장면" loading="lazy">
+          <img src="img/reel1.jpg" alt="라즈베리 휘낭시에를 나란히 올려둔 모습" loading="lazy">
           <div class="feed-cap"><p>휘낭시에 반죽 붓기<br>· 30초</p></div>
         </a>
-
-        <a class="feed-item reel" data-type="reel" href="#" rel="noopener">
+        <a class="feed-item reel" href="#" rel="noopener">
           <span class="feed-tag rl">릴스</span>
           <span class="reel-play"></span>
-          <img src="img/g5.jpg" alt="케이크 아이싱 장면" loading="lazy">
-          <div class="feed-cap"><p>저당 크림 아이싱<br>· 45초</p></div>
+          <img src="img/reel2.jpg" alt="바스크 치즈케이크 굽는 장면" loading="lazy">
+          <div class="feed-cap"><p>바스크 치즈케이크 굽기<br>· 45초</p></div>
         </a>
-
-        <a class="feed-item reel" data-type="reel" href="#" rel="noopener">
+        <a class="feed-item reel" href="#" rel="noopener">
           <span class="feed-tag rl">릴스</span>
           <span class="reel-play"></span>
-          <img src="img/g6.jpg" alt="초콜릿 케이크 만드는 장면" loading="lazy">
-          <div class="feed-cap"><p>카카오닙스 올리기<br>· 20초</p></div>
+          <img src="img/reel3.jpg" alt="초콜릿 휘낭시에 완성 장면" loading="lazy">
+          <div class="feed-cap"><p>카카오 휘낭시에 굽기<br>· 20초</p></div>
         </a>
+      </div>
+
+      <span class="feed-label">Works — 작업물</span>
+      <div class="feed-grid">
+        <figure class="feed-item">
+          <img src="img/w1.jpg" alt="라즈베리를 올린 휘낭시에 세 개" loading="lazy">
+          <div class="feed-cap"><p>라즈베리 휘낭시에.<br>1개 95kcal로 맞췄습니다.</p></div>
+        </figure>
+        <figure class="feed-item">
+          <img src="img/w2.jpg" alt="블루베리를 올린 저당 치즈케이크" loading="lazy">
+          <div class="feed-cap"><p>블루베리 치즈케이크.<br>설탕 0g, 알룰로스로만.</p></div>
+        </figure>
+        <figure class="feed-item">
+          <img src="img/w3.jpg" alt="접시에 담긴 치즈케이크와 커피" loading="lazy">
+          <div class="feed-cap"><p>플레인 바스크.<br>커피랑 먹을 때가 제일 좋습니다.</p></div>
+        </figure>
+        <figure class="feed-item">
+          <img src="img/w4.jpg" alt="딸기 소스를 올린 치즈케이크" loading="lazy">
+          <div class="feed-cap"><p>딸기철에만 나오는 조합.</p></div>
+        </figure>
+        <figure class="feed-item">
+          <img src="img/w5.jpg" alt="비스킷을 올린 치즈케이크" loading="lazy">
+          <div class="feed-cap"><p>시나몬 비스킷 치즈케이크.<br>스무 번째 시도 만에 성공.</p></div>
+        </figure>
+        <figure class="feed-item">
+          <img src="img/w6.jpg" alt="블루베리 소스를 올린 치즈케이크" loading="lazy">
+          <div class="feed-cap"><p>생블루베리 조려서 올립니다.<br>설탕 대신 알룰로스로.</p></div>
+        </figure>
       </div>
 
       <div class="order-note" style="margin-top:28px;">
         <b>이 페이지를 실제 인스타와 연결하려면</b><br>
         지금 보이는 사진과 문구는 <b>자리를 잡아둔 예시</b>입니다. 다음 두 가지만 주시면 바로 진짜로 바꿔 드립니다.<br>
-        ① 직접 찍으신 사진 파일 &nbsp;② 릴스 게시물 주소(인스타에서 '링크 복사')<br>
-        <span style="color:var(--butter);">※ 리그램 사진은 올려주신 분의 계정을 반드시 함께 표기해야 합니다. 지금은 <b>@출처_계정</b> 자리로 비워두었습니다.</span>
+        ① 직접 찍으신 사진 파일 &nbsp;② 릴스 게시물 주소 — 인스타에서 릴스를 열고 <b>'링크 복사'</b><br>
+        <span style="color:var(--butter);">※ 릴스 카드는 지금 눌러도 이동하지 않습니다. 주소를 넣으면 인스타로 연결됩니다.</span>
       </div>
     </div>
   </div>
@@ -594,24 +568,6 @@
 <footer>© 2026 bong베이커리 · 원하연 &nbsp;|&nbsp; 설탕을 덜고, 맛은 남깁니다.</footer>
 
 <script>
-/* ===========================================================
-   인스타 피드 — 전체 / 직접 / 리그램 / 릴스 걸러 보기
-   =========================================================== */
-(function(){
-  const bar = document.getElementById('feedFilter');
-  const grid = document.getElementById('feedGrid');
-  if(!bar || !grid) return;
-  const items = Array.from(grid.children);
-
-  bar.addEventListener('click', e => {
-    const btn = e.target.closest('button');
-    if(!btn) return;
-    const f = btn.dataset.f;
-    bar.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === btn));
-    items.forEach(el => el.classList.toggle('hide', f !== 'all' && el.dataset.type !== f));
-  });
-})();
-
 /* ===========================================================
    섹션 탭 — 고른 섹션 하나만 펼친다
    =========================================================== */
