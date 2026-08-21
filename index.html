@@ -3,22 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>원하연 | 제빵 포트폴리오</title>
+<title>원하연 | 다이어트 베이킹</title>
+<meta name="description" content="설탕과 밀가루를 덜어낸 다이어트 구움과자. 파운드케이크·치즈케이크·휘낭시에와 주문 제작 다이어트 케이크.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#FDF6EC;
-    --cream-2:#F6E9D7;
-    --crust:#8B5E34;
-    --crust-dark:#4A2F1A;
-    --oven:#38251A;
-    --butter:#F2C14E;
-    --caramel:#C9834A;
-    --ink:#3B2A1D;
-    --muted:#8A7767;
-    --line:#E8D9C4;
-    --white:#FFFDF9;
-    --shadow:0 2px 8px rgba(74,47,26,.06), 0 12px 32px rgba(74,47,26,.08);
-    --serif: Georgia, "Nanum Myeongjo", "Batang", serif;
+    --cream:#FFFFFF;      /* 기본 배경 */
+    --cream-2:#F4F3F0;    /* 옅은 면 */
+    --crust:#3A3A38;      /* 강조 텍스트 */
+    --crust-dark:#1A1A18; /* 가장 진한 색 */
+    --oven:#1A1A18;
+    --butter:#9A9790;     /* 라벨용 회색 */
+    --caramel:#6B6862;    /* 보조 강조 */
+    --ink:#1A1A18;
+    --muted:#8C8983;
+    --line:#E6E4DF;
+    --white:#FAFAF8;
+    --shadow:none;
+    --serif: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
     --sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
   }
 
@@ -33,7 +37,7 @@
     line-height:1.75;
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3{ font-family:var(--serif); font-weight:700; line-height:1.25; letter-spacing:-.01em; margin:0; }
+  h1,h2,h3{ font-family:var(--serif); font-weight:600; line-height:1.3; letter-spacing:-.02em; margin:0; }
   a{ color:inherit; }
   img{ max-width:100%; }
 
@@ -42,25 +46,34 @@
   /* ---------- Nav ---------- */
   nav{
     position:sticky; top:0; z-index:50;
-    background:rgba(253,246,236,.86);
+    background:rgba(255,255,255,.9);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
   nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
   .brand{
-    font-family:var(--serif); font-size:19px; font-weight:700;
-    text-decoration:none; white-space:nowrap; transition:opacity .15s;
+    font-family:var(--serif); font-size:16px; font-weight:600; letter-spacing:.18em;
+    text-decoration:none; white-space:nowrap; transition:opacity .15s; color:var(--ink);
   }
-  .brand span{ color:var(--caramel); }
+  .brand span{
+    color:var(--muted); font-size:10.5px; letter-spacing:.16em;
+    margin-left:8px; font-weight:400;
+  }
   .brand:hover{ opacity:.7; }
   .brand.home{ cursor:default; }
-  .navlinks{ display:flex; gap:6px; font-size:14.5px; flex-wrap:wrap; }
+  .navlinks{ display:flex; gap:26px; font-size:13.5px; flex-wrap:wrap; }
   .navlinks a{
-    text-decoration:none; color:var(--muted); transition:color .15s, background .15s;
-    padding:7px 13px; border-radius:999px; white-space:nowrap; position:relative;
+    text-decoration:none; color:var(--muted); transition:color .15s;
+    padding:8px 2px; white-space:nowrap; position:relative; letter-spacing:.01em;
   }
-  .navlinks a:hover{ color:var(--crust); background:rgba(139,94,52,.07); }
-  .navlinks a.active{ color:var(--crust-dark); background:var(--cream-2); font-weight:700; }
+  .navlinks a::after{
+    content:""; position:absolute; left:2px; right:2px; bottom:2px; height:1px;
+    background:var(--ink); transform:scaleX(0); transform-origin:left; transition:transform .22s ease;
+  }
+  .navlinks a:hover{ color:var(--ink); }
+  .navlinks a:hover::after{ transform:scaleX(1); }
+  .navlinks a.active{ color:var(--ink); }
+  .navlinks a.active::after{ transform:scaleX(1); }
   @media (max-width:860px){
     nav .wrap{ height:auto; padding-block:10px; flex-direction:column; align-items:flex-start; gap:8px; }
     .navlinks{ gap:4px; font-size:13px; width:100%; }
@@ -75,48 +88,45 @@
 
   /* ---------- Hero ---------- */
   header{
-    padding:clamp(64px,11vw,128px) 0 clamp(56px,9vw,104px);
-    background:
-      radial-gradient(1000px 460px at 82% -10%, rgba(242,193,78,.30), transparent 62%),
-      radial-gradient(760px 400px at 6% 105%, rgba(201,131,74,.18), transparent 60%);
+    padding:clamp(56px,9vw,110px) 0 clamp(56px,9vw,104px);
+    background:var(--cream);
   }
   .hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(28px,5vw,60px); align-items:center; }
   @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
   .hero-photo{
-    width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:20px;
-    box-shadow:0 18px 44px rgba(74,47,26,.22); border:1px solid var(--line);
+    width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:0;
+    border:1px solid var(--line);
   }
   @media (max-width:860px){ .hero-photo{ aspect-ratio:16/10; } }
   .about-photo{
-    width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:16px;
+    width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:0;
     border:1px solid var(--line); box-shadow:var(--shadow); margin-bottom:14px;
   }
   .eyebrow{
-    display:inline-flex; align-items:center; gap:9px;
-    font-size:13px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--caramel); font-weight:700; margin-bottom:22px;
+    display:inline-block;
+    font-size:11.5px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--muted); font-weight:600; margin-bottom:26px;
   }
-  .eyebrow::before{ content:""; width:34px; height:1.5px; background:var(--caramel); }
-  header h1{ font-size:clamp(40px,7.4vw,72px); margin-bottom:22px; }
-  header h1 em{ font-style:normal; color:var(--caramel); }
-  .lede{ font-size:clamp(16px,2.1vw,19px); color:var(--muted); max-width:56ch; margin:0 0 34px; }
+  header h1{ font-size:clamp(34px,5.6vw,58px); margin-bottom:24px; font-weight:600; line-height:1.32; }
+  header h1 em{ font-style:normal; color:var(--muted); }
+  .lede{ font-size:clamp(15px,1.7vw,17px); color:var(--muted); max-width:46ch; margin:0 0 38px; line-height:1.9; }
   .cta{ display:flex; gap:12px; flex-wrap:wrap; }
   .btn{
-    display:inline-block; padding:13px 26px; border-radius:999px;
-    font-size:15px; font-weight:600; text-decoration:none; border:1.5px solid transparent;
-    transition:transform .15s, box-shadow .15s, background .15s;
+    display:inline-block; padding:14px 30px; border-radius:2px;
+    font-size:13.5px; font-weight:600; text-decoration:none; border:1px solid transparent;
+    letter-spacing:.04em; transition:background .18s, color .18s, border-color .18s;
   }
-  .btn-solid{ background:var(--crust-dark); color:var(--cream); }
-  .btn-solid:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(74,47,26,.28); }
-  .btn-ghost{ border-color:var(--crust); color:var(--crust); }
-  .btn-ghost:hover{ background:rgba(139,94,52,.08); transform:translateY(-2px); }
+  .btn-solid{ background:var(--crust-dark); color:#fff; }
+  .btn-solid:hover{ background:#000; }
+  .btn-ghost{ border-color:var(--ink); color:var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:#fff; }
 
   /* ---------- Sections ---------- */
-  section{ padding:clamp(56px,8vw,96px) 0; }
-  .sec-head{ margin-bottom:44px; }
-  .sec-num{ font-family:var(--serif); font-size:14px; color:var(--butter); letter-spacing:.2em; display:block; margin-bottom:8px; }
-  .sec-head h2{ font-size:clamp(27px,4vw,40px); }
-  .sec-head p{ color:var(--muted); margin:12px 0 0; max-width:58ch; }
+  section{ padding:clamp(56px,8vw,104px) 0; }
+  .sec-head{ margin-bottom:clamp(36px,5vw,56px); }
+  .sec-num{ font-size:11.5px; color:var(--butter); letter-spacing:.22em; display:block; margin-bottom:14px; text-transform:uppercase; }
+  .sec-head h2{ font-size:clamp(24px,3.2vw,34px); font-weight:600; }
+  .sec-head p{ color:var(--muted); margin:14px 0 0; max-width:52ch; font-size:15px; line-height:1.9; }
 
   /* About */
   .about{ display:grid; grid-template-columns:1.35fr 1fr; gap:clamp(28px,5vw,64px); align-items:start; }
@@ -125,7 +135,7 @@
   .about p:last-child{ margin-bottom:0; }
   .stats{ display:grid; gap:14px; }
   .stat{
-    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    background:var(--white); border:1px solid var(--line); border-radius:2px;
     padding:20px 22px; box-shadow:var(--shadow);
   }
   .stat b{ display:block; font-family:var(--serif); font-size:32px; line-height:1.1; color:var(--crust); }
@@ -134,11 +144,11 @@
   /* Menu grid */
   .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(248px,1fr)); gap:20px; }
   .card{
-    background:var(--white); border:1px solid var(--line); border-radius:16px;
+    background:var(--white); border:1px solid var(--line); border-radius:2px;
     padding:0; overflow:hidden; box-shadow:var(--shadow);
     transition:transform .18s, box-shadow .18s, border-color .18s;
   }
-  .card:hover{ transform:translateY(-4px); border-color:var(--caramel); box-shadow:0 14px 34px rgba(74,47,26,.13); }
+  .card:hover{ transform:translateY(-4px); border-color:var(--caramel);  }
   .card .thumb{
     display:block; width:100%; aspect-ratio:4/3; object-fit:cover;
     background:var(--cream-2); transition:transform .4s ease;
@@ -175,7 +185,7 @@
     grid-template-rows:repeat(20, var(--cell));
     gap:1px; padding:7px; border-radius:12px;
     background:var(--oven);
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), 0 16px 38px rgba(74,47,26,.26);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), 0 16px 38px rgba(26,26,24,.18);
     position:relative;
   }
   .cell{
@@ -188,7 +198,7 @@
   .cell.flash{ background:#FFF !important; box-shadow:0 0 14px rgba(255,255,255,.9); }
 
   .panel{ width:min(220px, 60vw); display:grid; gap:14px; }
-  .box{ background:var(--white); border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:var(--shadow); }
+  .box{ background:var(--white); border:1px solid var(--line); border-radius:2px; padding:16px 18px; box-shadow:var(--shadow); }
   .box h4{ margin:0 0 10px; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-family:var(--sans); font-weight:700; }
   .next{ display:grid; grid-template-columns:repeat(4, calc(var(--cell) * .82)); grid-template-rows:repeat(4, calc(var(--cell) * .82)); gap:1px; justify-content:center; }
   .next .cell{ font-size:calc(var(--cell) * .5); background:transparent; }
@@ -238,6 +248,40 @@
   .links{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
   footer{ border-top:1px solid var(--line); padding:30px 0; text-align:center; font-size:13px; color:var(--muted); }
 
+  /* ---------- 메뉴 · 가격 ---------- */
+  .menu-hero{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:clamp(40px,6vw,64px); }
+  .menu-hero img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+  @media (max-width:640px){ .menu-hero{ grid-template-columns:1fr; } }
+
+  .menu-group{ margin-bottom:clamp(44px,6vw,72px); }
+  .menu-group > h3{
+    font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
+    font-weight:600; padding-bottom:14px; border-bottom:1px solid var(--ink); margin-bottom:0;
+  }
+  .menu-item{
+    display:grid; grid-template-columns:1fr auto; gap:6px 28px;
+    padding:24px 0; border-bottom:1px solid var(--line); align-items:start;
+  }
+  .menu-item h4{ font-size:17px; font-weight:600; margin:0 0 8px; letter-spacing:-.01em; }
+  .menu-opt{ font-size:13.5px; color:var(--muted); margin:0 0 10px; line-height:1.8; }
+  .menu-nutri{ font-size:11.5px; color:var(--butter); letter-spacing:.04em; }
+  .menu-price{ text-align:right; white-space:nowrap; }
+  .menu-price div{ font-size:14.5px; margin-bottom:6px; }
+  .menu-price div:last-child{ margin-bottom:0; }
+  .menu-price span{ color:var(--muted); font-size:12.5px; margin-right:10px; }
+  .menu-price b{ font-weight:600; }
+  @media (max-width:560px){
+    .menu-item{ grid-template-columns:1fr; gap:12px; }
+    .menu-price{ text-align:left; }
+    .menu-price span{ margin-right:8px; }
+  }
+
+  .order-note{
+    border:1px solid var(--line); background:var(--white);
+    padding:24px 26px; font-size:13.5px; color:var(--muted); line-height:2;
+  }
+  .order-note b{ color:var(--ink); font-weight:600; }
+
   /* ---------- 환율 ---------- */
   .fx-meta{
     display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center;
@@ -250,7 +294,7 @@
   }
   .fx-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:14px; }
   .fx-card{
-    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    background:var(--white); border:1px solid var(--line); border-radius:2px;
     padding:18px 20px; box-shadow:var(--shadow);
     display:flex; flex-direction:column; gap:2px;
   }
@@ -270,7 +314,7 @@
   }
   .fx-card:hover, .fx-card:focus-visible{
     transform:translateY(-3px); border-color:var(--caramel);
-    box-shadow:0 12px 28px rgba(74,47,26,.14); outline:none;
+    box-shadow:0 8px 20px rgba(26,26,24,.07); outline:none;
   }
   .fx-more{ font-size:12px; color:var(--muted); margin-top:10px; }
   .fx-more span{ color:var(--caramel); font-weight:700; }
@@ -283,9 +327,9 @@
   }
   .modal.show{ display:flex; }
   .modal-box{
-    background:var(--white); border:1px solid var(--line); border-radius:18px;
+    background:var(--white); border:1px solid var(--line); border-radius:3px;
     width:min(760px, 100%); max-height:90vh; overflow:auto;
-    padding:clamp(20px,3.4vw,30px); box-shadow:0 24px 60px rgba(74,47,26,.3);
+    padding:clamp(20px,3.4vw,30px); box-shadow:0 24px 60px rgba(26,26,24,.22);
   }
   .modal-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:4px; }
   .modal-head h3{ font-size:22px; }
@@ -297,7 +341,7 @@
   .modal-x:hover{ background:var(--cream-2); }
 
   .fx-stats{ display:grid; grid-template-columns:repeat(auto-fit, minmax(110px,1fr)); gap:10px; margin-bottom:18px; }
-  .fx-stat{ background:var(--cream); border:1px solid var(--line); border-radius:11px; padding:11px 13px; }
+  .fx-stat{ background:var(--cream); border:1px solid var(--line); border-radius:2px; padding:11px 13px; }
   .fx-stat span{ display:block; font-size:11.5px; color:var(--muted); letter-spacing:.04em; }
   .fx-stat b{ font-family:var(--serif); font-size:19px; color:var(--crust); }
   .fx-stat b.up{ color:#B23B2E; }
@@ -307,9 +351,9 @@
   .chart-wrap svg{ display:block; width:100%; height:auto; touch-action:none; }
   .grid-line{ stroke:var(--line); stroke-width:1; }
   .axis-text{ fill:var(--muted); font-size:11px; font-family:var(--sans); }
-  .fx-line{ fill:none; stroke:#C9834A; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
-  .fx-area{ fill:rgba(201,131,74,.12); }
-  .fx-dot{ fill:#C9834A; stroke:var(--white); stroke-width:2; }
+  .fx-line{ fill:none; stroke:#1A1A18; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
+  .fx-area{ fill:rgba(26,26,24,.06); }
+  .fx-dot{ fill:#1A1A18; stroke:var(--white); stroke-width:2; }
   .cross{ stroke:var(--caramel); stroke-width:1; stroke-dasharray:3 3; opacity:0; }
   .tip{
     position:absolute; pointer-events:none; opacity:0; transform:translate(-50%,-120%);
@@ -339,14 +383,14 @@
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top">원하연 <span>Bakery</span></a>
+    <a class="brand" href="#top">HAYEON <span>less sugar</span></a>
     <div class="navlinks">
-      <a href="#about">소개</a>
-      <a href="#works">대표 작품</a>
-      <a href="#career">경력</a>
+      <a href="#about">브랜드</a>
+      <a href="#works">메뉴</a>
+      <a href="#career">이야기</a>
       <a href="#game">빵 테트리스</a>
       <a href="#fx">재료 환율</a>
-      <a href="#contact">연락</a>
+      <a href="#contact">주문 문의</a>
     </div>
   </div>
 </nav>
@@ -354,49 +398,49 @@
 <header id="top" class="tab-panel">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Baker &amp; Pâtissier</span>
-      <h1>반죽에서 시작해<br><em>하루의 온도</em>를 굽습니다.</h1>
+      <span class="eyebrow">Diet Baking Studio</span>
+      <h1>설탕을 덜고,<br><em>맛은 남깁니다.</em></h1>
       <p class="lede">
-        천연 발효종과 국산 밀을 고집하는 제빵사 원하연입니다.
-        느리게 부풀린 반죽이 만드는 결과 향, 그 사소한 차이를 좋아합니다.
+        밀가루 대신 아몬드·오트가루로, 설탕 대신 알룰로스로 굽습니다.
+        참다가 무너지는 대신, 매일 조금씩 먹을 수 있는 디저트를 만듭니다.
       </p>
       <div class="cta">
-        <a class="btn btn-solid" href="#works">대표 작품 보기</a>
-        <a class="btn btn-ghost" href="#game">🍞 빵 테트리스 하기</a>
+        <a class="btn btn-solid" href="#works">메뉴 보기</a>
+        <a class="btn btn-ghost" href="#career">이야기</a>
       </div>
     </div>
-    <img class="hero-photo" src="img/hero.jpg" alt="갓 구워낸 통밀 사워도우 빵" width="900" height="1125">
+    <img class="hero-photo" src="img/hero.jpg" alt="유리컵에 담긴 딸기 저당 디저트" width="1000" height="1250">
   </div>
 </header>
 
 <section id="about" class="tab-panel">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-num">01</span>
-      <h2>소개</h2>
+      <span class="sec-num">Brand</span>
+      <h2>덜어내는 굽기</h2>
     </div>
     <div class="about reveal">
       <div>
         <p>
-          빵을 만드는 일은 결국 기다리는 일이라고 생각합니다. 발효는 서두르는 사람에게
-          좋은 결과를 주지 않고, 온도와 습도는 매일 조금씩 다릅니다. 그래서 저는
-          매일 아침 반죽의 상태를 손으로 확인하는 것부터 하루를 시작합니다.
+          다이어트를 하면서 가장 힘든 건 배고픔이 아니라 <strong>'하나도 못 먹는다'는
+          기분</strong>이라고 생각합니다. 참다가 한 번에 무너지는 걸 여러 번 겪고 나서,
+          매일 조금씩 먹어도 괜찮은 디저트를 만들기 시작했습니다.
         </p>
         <p>
-          자가배양한 사워도우 스타터를 5년째 이어오고 있으며, 국산 밀과 제철 재료를
-          중심으로 레시피를 설계합니다. 화려한 데코레이션보다 재료 본연의 맛이
-          선명하게 남는 빵을 만들고 싶습니다.
+          설탕 대신 알룰로스와 에리스리톨을, 밀가루 대신 아몬드가루와 오트가루를
+          씁니다. 크림치즈는 지방을 줄인 제품으로 바꾸고, 버터 양은 레시피마다
+          몇 번씩 줄여가며 <strong>맛이 무너지기 직전까지</strong> 덜어냅니다.
         </p>
         <p>
-          현재는 서울에서 소규모 베이커리를 운영하며, 주말에는 홈베이킹 클래스를
-          진행하고 있습니다.
+          모든 메뉴에 100g당 칼로리와 당류를 표기합니다. 숫자를 알고 먹는 것과
+          모르고 먹는 것은 다르니까요. 오늘 구운 것만 그날 판매합니다.
         </p>
       </div>
       <div class="stats">
-        <img class="about-photo" src="img/shop.jpg" alt="빵이 진열된 베이커리 매장" loading="lazy">
-        <div class="stat"><b>8년</b><span>제빵 실무 경력</span></div>
-        <div class="stat"><b>60+</b><span>개발한 레시피</span></div>
-        <div class="stat"><b>1,200명</b><span>클래스 수강생</span></div>
+        <img class="about-photo" src="img/mood3.jpg" alt="블루베리를 올린 저당 치즈케이크" loading="lazy">
+        <div class="stat"><b>-58%</b><span>일반 레시피 대비 평균 당류</span></div>
+        <div class="stat"><b>95kcal</b><span>휘낭시에 1개 기준</span></div>
+        <div class="stat"><b>0</b><span>흰설탕 · 흰밀가루 사용</span></div>
       </div>
     </div>
   </div>
@@ -405,59 +449,98 @@
 <section id="works" class="tab-panel">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-num">02</span>
-      <h2>대표 작품</h2>
-      <p>매장에서 가장 오래 사랑받은 여섯 가지. 모두 당일 반죽, 당일 판매를 원칙으로 합니다.</p>
+      <span class="sec-num">Menu</span>
+      <h2>메뉴</h2>
+      <p>모두 당일 구운 것만 그날 판매합니다. 칼로리와 당류는 100g 기준이며, 자체 계량한 값입니다.</p>
     </div>
-    <div class="grid reveal">
-      <div class="card">
-        <div class="thumb-box"><img class="thumb" src="img/bread1.jpg" alt="36시간 저온 발효 사워도우" loading="lazy"></div>
-        <div class="body">
-          <div class="sub">Sourdough</div>
-          <h3>36시간 사워도우</h3>
-          <p>자가배양 스타터로 36시간 저온 발효. 얇고 바삭한 크러스트 안에 촉촉한 기공이 살아 있습니다.</p>
+
+    <div class="menu-hero reveal">
+      <img src="img/mood1.jpg" alt="저당 치즈케이크 한 조각" loading="lazy">
+      <img src="img/mood2.jpg" alt="과일을 올린 구움과자" loading="lazy">
+    </div>
+
+    <div class="reveal">
+      <div class="menu-group">
+        <h3>Signature — 대표 메뉴</h3>
+
+        <div class="menu-item">
+          <div>
+            <h4>다이어트 파운드케이크</h4>
+            <p class="menu-opt">플레인 · 얼그레이 · 다크초코 · 흑임자</p>
+            <p class="menu-nutri">100g당 218kcal · 당류 2.1g · 단백질 9.4g</p>
+          </div>
+          <div class="menu-price">
+            <div><span>조각</span><b>4,500원</b></div>
+            <div><span>한 통(로프)</span><b>18,000원</b></div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div>
+            <h4>다이어트 치즈케이크</h4>
+            <p class="menu-opt">바스크 · 블루베리 · 리코타 레몬</p>
+            <p class="menu-nutri">100g당 176kcal · 당류 3.0g · 단백질 8.1g</p>
+          </div>
+          <div class="menu-price">
+            <div><span>조각</span><b>6,500원</b></div>
+            <div><span>홀 1호(지름 15cm)</span><b>34,000원</b></div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div>
+            <h4>다이어트 휘낭시에</h4>
+            <p class="menu-opt">플레인 · 말차 · 얼그레이 · 카카오닙스</p>
+            <p class="menu-nutri">1개(30g) 95kcal · 당류 1.2g · 단백질 3.6g</p>
+          </div>
+          <div class="menu-price">
+            <div><span>1개</span><b>3,200원</b></div>
+            <div><span>6개 세트</span><b>18,000원</b></div>
+          </div>
         </div>
       </div>
-      <div class="card">
-        <div class="thumb-box"><img class="thumb" src="img/bread2.jpg" alt="버터 크루아상" loading="lazy"></div>
-        <div class="body">
-          <div class="sub">Viennoiserie</div>
-          <h3>버터 크루아상</h3>
-          <p>프랑스산 AOP 버터로 3절 3회 접기. 27겹의 결이 부서지는 소리를 기준으로 굽습니다.</p>
+
+      <div class="menu-group">
+        <h3>Cake — 다이어트 케이크 (주문 제작)</h3>
+
+        <div class="menu-item">
+          <div>
+            <h4>기본 케이크</h4>
+            <p class="menu-opt">바닐라 · 초코 · 얼그레이 · 말차 중 택 1<br>저당 크림치즈 프로스팅, 생과일 토핑</p>
+            <p class="menu-nutri">100g당 192kcal · 당류 3.4g</p>
+          </div>
+          <div class="menu-price">
+            <div><span>1호(지름 15cm · 2~3인)</span><b>42,000원</b></div>
+            <div><span>2호(지름 18cm · 4~6인)</span><b>58,000원</b></div>
+            <div><span>3호(지름 21cm · 7~10인)</span><b>76,000원</b></div>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div>
+            <h4>추가 옵션</h4>
+            <p class="menu-opt">레터링, 생과일 추가, 단백질 강화(WPI 첨가) 등</p>
+            <p class="menu-nutri">옵션에 따라 칼로리가 달라집니다</p>
+          </div>
+          <div class="menu-price">
+            <div><span>레터링</span><b>+5,000원</b></div>
+            <div><span>생과일 추가</span><b>+8,000원</b></div>
+            <div><span>단백질 강화</span><b>+6,000원</b></div>
+          </div>
+        </div>
+
+        <div class="order-note" style="margin-top:26px;">
+          <b>주문 안내</b><br>
+          케이크는 <b>수령 3일 전까지</b> 예약해 주세요. 당일 주문은 어렵습니다.<br>
+          알레르기(견과류·유제품·계란)가 있으시면 미리 알려주시면 가능한 범위에서 조정해 드립니다.<br>
+          저당 감미료 특성상 냉장 보관 시 표면이 단단해질 수 있습니다. 드시기 20분 전에 꺼내 두세요.
         </div>
       </div>
-      <div class="card">
-        <div class="thumb-box"><img class="thumb" src="img/bread3.jpg" alt="우유 식빵" loading="lazy"></div>
-        <div class="body">
-          <div class="sub">Signature</div>
-          <h3>우유 식빵</h3>
-          <p>탕종법으로 수분을 잡아 3일이 지나도 부드럽습니다. 매장 판매 1위 제품입니다.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="thumb-box"><img class="thumb" src="img/bread4.jpg" alt="오늘의 모듬 빵 바구니" loading="lazy"></div>
-        <div class="body">
-          <div class="sub">Daily</div>
-          <h3>오늘의 모듬 빵</h3>
-          <p>그날 상태가 가장 좋은 반죽으로 굽는 대여섯 가지. 아침 8시에 한 번만 나옵니다.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="thumb-box"><img class="thumb" src="img/bread5.jpg" alt="시골빵 캄파뉴" loading="lazy"></div>
-        <div class="body">
-          <div class="sub">Country</div>
-          <h3>시골빵 캄파뉴</h3>
-          <p>호밀을 섞어 진하게 구운 큰 덩어리 빵. 쿠프가 벌어진 자리에 향이 가장 잘 남습니다.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="thumb-box"><img class="thumb" src="img/bread6.jpg" alt="제철 과일 디저트" loading="lazy"></div>
-        <div class="body">
-          <div class="sub">Seasonal</div>
-          <h3>제철 과일 디저트</h3>
-          <p>계절마다 재료를 바꾸는 유일한 메뉴. 여름에는 무화과, 겨울에는 딸기를 씁니다.</p>
-        </div>
-      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:8px;">
+      <img src="img/grain.jpg" alt="통곡물 빵 단면" loading="lazy"
+           style="width:100%; aspect-ratio:21/9; object-fit:cover; display:block;">
     </div>
   </div>
 </section>
@@ -465,29 +548,48 @@
 <section id="career" class="tab-panel">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-num">03</span>
-      <h2>경력 &amp; 자격</h2>
+      <span class="sec-num">Story</span>
+      <h2>결산 마감과 오븐 사이에서</h2>
+      <p>10년 동안 숫자를 맞추던 사람이 왜 반죽을 잡게 됐는지에 대한 이야기입니다.</p>
     </div>
     <div class="timeline reveal">
       <div class="tl-item">
-        <div class="tl-year">2023 — 현재</div>
-        <h3>Bakery HAYEON · 오너 셰프</h3>
-        <p>서울 성수동 소규모 베이커리 운영. 메뉴 기획, 생산, 팀 운영 총괄.</p>
+        <div class="tl-year">2016 — 2026</div>
+        <h3>제조기업 회계팀 · 10년</h3>
+        <p>연결결산과 세무 신고를 맡았습니다. 분기 마감이면 새벽에 퇴근하는 날이 이어졌고,
+           숫자가 1원 단위까지 맞아야 끝나는 일이었습니다. 정확했지만, 끝나도 남는 게 없었습니다.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2020 — 2023</div>
-        <h3>OO 호텔 베이커리 · 파트 리더</h3>
-        <p>조식 및 라운지 베이커리 파트 총괄. 신메뉴 12종 개발, 원가율 6% 개선.</p>
+        <div class="tl-year">2020</div>
+        <h3>마감 끝난 새벽의 반죽</h3>
+        <p>스트레스를 풀 방법을 찾다가 밤에 빵을 굽기 시작했습니다.
+           결산은 마감이 끝나도 다음 분기가 오지만, 반죽은 <strong>구우면 그날로 결과가 나왔습니다.</strong>
+           그 완결감이 좋아서 매주 구웠습니다.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2018 — 2020</div>
-        <h3>Boulangerie OO · 제빵사</h3>
-        <p>천연발효 하드 브레드 라인 담당. 사워도우 스타터 배양 및 관리 전담.</p>
+        <div class="tl-year">2022 — 2023</div>
+        <h3>먹을수록 늘어난 몸무게</h3>
+        <p>구운 걸 다 먹으니 체중이 늘었습니다. 끊자니 유일한 낙이 사라지는 셈이었습니다.
+           그래서 설탕과 밀가루를 빼고 다시 굽기 시작했습니다.
+           맛없는 실패작을 2년쯤 먹었습니다.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024 — 2025</div>
+        <h3>레시피 노트 60권</h3>
+        <p>회계 하던 버릇대로 배합비·굽는 온도·수분율을 전부 기록했습니다.
+           <strong>같은 레시피를 스무 번씩 바꿔가며 당류를 1g씩 줄였습니다.</strong>
+           그 기록이 지금 메뉴의 바탕이 됐습니다. 제과·제빵기능사를 땄습니다.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <h3>HAYEON less sugar · 오픈</h3>
+        <p>10년 다니던 회사를 나와 작업실 겸 매장을 열었습니다.
+           원가표는 여전히 제가 직접 짭니다. 그건 잘하는 일이라서요.</p>
       </div>
       <div class="tl-item">
         <div class="tl-year">Certificates</div>
         <h3>보유 자격</h3>
-        <p>제빵기능사 · 제과기능사 · 위생사 · SCA Barista Skills Foundation</p>
+        <p>제과기능사 · 제빵기능사 · 위생사 · 재경관리사</p>
       </div>
     </div>
   </div>
@@ -496,9 +598,9 @@
 <section id="game" class="game-sec tab-panel">
   <div class="wrap">
     <div class="sec-head reveal" style="text-align:center;">
-      <span class="sec-num">04</span>
+      <span class="sec-num">Game</span>
       <h2>빵 테트리스</h2>
-      <p style="margin-inline:auto;">떨어지는 빵을 차곡차곡 쌓아 진열대를 완성해 보세요. 한 줄을 채우면 판매 완료!</p>
+      <p style="margin-inline:auto;">기다리는 동안 한 판 하세요. 떨어지는 빵을 쌓아 한 줄을 채우면 판매 완료입니다.</p>
     </div>
 
     <div class="game reveal">
@@ -546,9 +648,9 @@
 <section id="fx" class="tab-panel">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-num">05</span>
+      <span class="sec-num">Ingredients</span>
       <h2>오늘의 재료 환율</h2>
-      <p>버터도 밀도 대부분 수입입니다. 환율이 오르면 다음 달 원가가 오릅니다. 관세청이 매주 고시하는 수입 과세환율이며, <strong>카드를 누르면 최근 6개월 추이</strong>를 볼 수 있습니다.</p>
+      <p>아몬드가루도 알룰로스도 대부분 수입입니다. 환율이 오르면 다음 달 원가가 오릅니다. 관세청이 매주 고시하는 수입 과세환율이며, <strong>카드를 누르면 최근 6개월 추이</strong>를 볼 수 있습니다.</p>
     </div>
     <div class="reveal">
       <div class="fx-meta" id="fxMeta"></div>
@@ -561,13 +663,14 @@
 <section id="contact" class="contact tab-panel">
   <div class="wrap">
     <div class="reveal">
-      <span class="sec-num">06</span>
-      <h2>같이 구워볼까요?</h2>
-      <p>클래스 문의, 협업 제안, 케이터링 주문 모두 환영합니다. 편하게 연락 주세요.</p>
+      <span class="sec-num">Contact</span>
+      <h2>주문 문의</h2>
+      <p>케이크 주문은 수령 3일 전까지, 구움과자는 당일 재고 확인 후 안내드립니다.
+         알레르기나 원하시는 당도가 있으면 함께 적어주세요.</p>
       <div class="links">
         <a class="btn btn-solid" href="mailto:whyeon84@gmail.com">whyeon84@gmail.com</a>
         <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">클래스 신청</a>
+        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">카카오톡 채널</a>
       </div>
     </div>
   </div>
@@ -586,7 +689,7 @@
   </div>
 </div>
 
-<footer>© 2026 원하연 (Hayeon Won). 반죽부터 굽기까지 직접 만들었습니다. 🥖</footer>
+<footer>© 2026 HAYEON less sugar · 원하연 &nbsp;|&nbsp; 설탕을 덜고, 맛은 남깁니다.</footer>
 
 <script>
 /* ===========================================================
