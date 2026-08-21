@@ -244,23 +244,27 @@
   .order-note b{ color:var(--ink); font-weight:600; }
 
   /* ---------- 인스타그램 피드 ---------- */
+  /* 어두운 톤의 피드 — 여백 없이 촘촘하게 */
+  #feed{ background:var(--crust-dark); }
+  #feed .sec-head h2, #feed .feed-label{ color:#F0E9D2; }
+  #feed .sec-head p{ color:rgba(240,233,210,.62); }
+  #feed .sec-num{ color:var(--caramel); }
+
   .feed-label{
     font-family:var(--serif); font-style:italic; font-size:17px;
-    letter-spacing:.1em; text-transform:none; color:var(--caramel);
-    font-weight:400; padding-bottom:14px; border-bottom:1px solid var(--caramel);
-    margin:0 0 22px; display:block;
+    letter-spacing:.1em; text-transform:none;
+    font-weight:400; padding-bottom:13px; border-bottom:1px solid rgba(201,169,97,.45);
+    margin:0 0 14px; display:block;
   }
-  .reel-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:clamp(44px,6vw,68px); }
-  @media (max-width:720px){ .reel-row{ gap:8px; } }
-
-  .feed-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-  @media (max-width:720px){ .feed-grid{ grid-template-columns:repeat(2,1fr); gap:8px; } }
+  .reel-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-bottom:clamp(40px,5vw,60px); }
+  .feed-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
+  @media (max-width:720px){ .feed-grid{ grid-template-columns:repeat(2,1fr); } }
 
   .feed-item{
-    position:relative; display:block; overflow:hidden; background:var(--cream-2);
-    aspect-ratio:1/1; margin:0; text-decoration:none; color:inherit; border-radius:6px;
+    position:relative; display:block; overflow:hidden; background:#0F2A21;
+    aspect-ratio:1/1; margin:0; text-decoration:none; color:inherit; border-radius:0;
   }
-  .feed-item.reel{ aspect-ratio:9/16; border-radius:120px 120px 6px 6px; }
+  .feed-item.reel{ aspect-ratio:4/5; border-radius:0; }
   .feed-item img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
   .feed-item:hover img{ transform:scale(1.05); }
 
@@ -274,26 +278,25 @@
   .feed-cap p{ margin:0; font-size:12.5px; line-height:1.6; }
   .feed-src{ font-size:11px; opacity:.8; }
 
+  /* 릴스 표시는 인스타처럼 오른쪽 위 작은 아이콘 하나만 */
   .feed-tag{
-    position:absolute; top:10px; left:10px; z-index:2;
-    font-size:10px; letter-spacing:.1em; text-transform:uppercase;
-    background:rgba(253,251,238,.94); color:var(--crust);
-    padding:4px 9px; border-radius:2px; font-weight:600;
+    position:absolute; top:9px; right:9px; z-index:2; font-size:0;
+    width:0; height:0; opacity:.92;
+    border-left:13px solid rgba(255,255,255,.94);
+    border-top:8px solid transparent; border-bottom:8px solid transparent;
   }
-  .feed-tag.re{ background:rgba(21,58,46,.88); color:var(--cream); }
-  .feed-tag.rl{ background:rgba(21,58,46,.88); color:var(--cream); }
 
   .reel-play{
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;
-    width:52px; height:52px; border-radius:50%; background:rgba(253,251,238,.92);
+    width:50px; height:50px; border-radius:50%;
+    background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.55);
     display:flex; align-items:center; justify-content:center; transition:transform .2s;
   }
-  .feed-item.reel:hover .reel-play{ transform:translate(-50%,-50%) scale(1.1); }
+  .feed-item.reel:hover .reel-play{ transform:translate(-50%,-50%) scale(1.08); }
   .reel-play::before{
-    content:""; border-left:14px solid var(--crust);
+    content:""; border-left:14px solid rgba(255,255,255,.95);
     border-top:9px solid transparent; border-bottom:9px solid transparent; margin-left:4px;
   }
-  .feed-item.hide{ display:none; }
 
   /* reveal */
   .reveal{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
@@ -358,7 +361,7 @@
         </p>
       </div>
       <div class="stats">
-        <img class="about-photo" src="img/mood3.jpg" alt="블루베리를 올린 저당 치즈케이크" loading="lazy">
+        <img class="about-photo" src="img/mood3.jpg" alt="라즈베리를 올린 밀푀유" loading="lazy">
         <div class="stat"><b>-58%</b><span>일반 레시피 대비 평균 당류</span></div>
         <div class="stat"><b>95kcal</b><span>휘낭시에 1개 기준</span></div>
         <div class="stat"><b>0</b><span>흰설탕 · 흰밀가루 사용</span></div>
@@ -525,48 +528,48 @@
         <a class="feed-item reel" href="#" rel="noopener">
           <span class="feed-tag rl">릴스</span>
           <span class="reel-play"></span>
-          <img src="img/reel1.jpg" alt="라즈베리 휘낭시에를 나란히 올려둔 모습" loading="lazy">
-          <div class="feed-cap"><p>휘낭시에 반죽 붓기<br>· 30초</p></div>
+          <img src="img/reel1.jpg" alt="어두운 조명 아래 카카오 디저트" loading="lazy">
+          <div class="feed-cap"><p>카카오 휘낭시에 굽기<br>· 30초</p></div>
         </a>
         <a class="feed-item reel" href="#" rel="noopener">
           <span class="feed-tag rl">릴스</span>
           <span class="reel-play"></span>
-          <img src="img/reel2.jpg" alt="바스크 치즈케이크 굽는 장면" loading="lazy">
-          <div class="feed-cap"><p>바스크 치즈케이크 굽기<br>· 45초</p></div>
+          <img src="img/reel2.jpg" alt="어두운 배경의 저당 케이크" loading="lazy">
+          <div class="feed-cap"><p>저당 크림 올리기<br>· 45초</p></div>
         </a>
         <a class="feed-item reel" href="#" rel="noopener">
           <span class="feed-tag rl">릴스</span>
           <span class="reel-play"></span>
-          <img src="img/reel3.jpg" alt="초콜릿 휘낭시에 완성 장면" loading="lazy">
-          <div class="feed-cap"><p>카카오 휘낭시에 굽기<br>· 20초</p></div>
+          <img src="img/reel3.jpg" alt="가나슈를 올린 카카오 케이크" loading="lazy">
+          <div class="feed-cap"><p>가나슈 붓기<br>· 20초</p></div>
         </a>
       </div>
 
       <span class="feed-label">Works — 작업물</span>
       <div class="feed-grid">
         <figure class="feed-item">
-          <img src="img/w1.jpg" alt="라즈베리를 올린 휘낭시에 세 개" loading="lazy">
-          <div class="feed-cap"><p>라즈베리 휘낭시에.<br>1개 95kcal로 맞췄습니다.</p></div>
+          <img src="img/w1.jpg" alt="라즈베리를 올린 저당 케이크" loading="lazy">
+          <div class="feed-cap"><p>라즈베리 저당 케이크.<br>흩뿌린 건 설탕이 아니라 에리스리톨.</p></div>
         </figure>
         <figure class="feed-item">
-          <img src="img/w2.jpg" alt="블루베리를 올린 저당 치즈케이크" loading="lazy">
-          <div class="feed-cap"><p>블루베리 치즈케이크.<br>설탕 0g, 알룰로스로만.</p></div>
+          <img src="img/w2.jpg" alt="라즈베리를 올린 밀푀유" loading="lazy">
+          <div class="feed-cap"><p>라즈베리 밀푀유.<br>크림은 그릭요거트 베이스로.</p></div>
         </figure>
         <figure class="feed-item">
-          <img src="img/w3.jpg" alt="접시에 담긴 치즈케이크와 커피" loading="lazy">
-          <div class="feed-cap"><p>플레인 바스크.<br>커피랑 먹을 때가 제일 좋습니다.</p></div>
+          <img src="img/w3.jpg" alt="블루베리를 올려 구운 케이크" loading="lazy">
+          <div class="feed-cap"><p>블루베리 오트 케이크.<br>100g에 176kcal.</p></div>
         </figure>
         <figure class="feed-item">
-          <img src="img/w4.jpg" alt="딸기 소스를 올린 치즈케이크" loading="lazy">
-          <div class="feed-cap"><p>딸기철에만 나오는 조합.</p></div>
+          <img src="img/w4.jpg" alt="흰 접시에 담긴 카카오 큐브" loading="lazy">
+          <div class="feed-cap"><p>카카오 큐브.<br>당류 1g 미만입니다.</p></div>
         </figure>
         <figure class="feed-item">
-          <img src="img/w5.jpg" alt="비스킷을 올린 치즈케이크" loading="lazy">
-          <div class="feed-cap"><p>시나몬 비스킷 치즈케이크.<br>스무 번째 시도 만에 성공.</p></div>
+          <img src="img/w5.jpg" alt="오트 그래놀라 바" loading="lazy">
+          <div class="feed-cap"><p>오트 그래놀라 바.<br>아침 대신 드시는 분이 많습니다.</p></div>
         </figure>
         <figure class="feed-item">
-          <img src="img/w6.jpg" alt="블루베리 소스를 올린 치즈케이크" loading="lazy">
-          <div class="feed-cap"><p>생블루베리 조려서 올립니다.<br>설탕 대신 알룰로스로.</p></div>
+          <img src="img/w6.jpg" alt="카카오 휘낭시에" loading="lazy">
+          <div class="feed-cap"><p>카카오 휘낭시에.<br>1개 95kcal로 맞췄습니다.</p></div>
         </figure>
       </div>
 
