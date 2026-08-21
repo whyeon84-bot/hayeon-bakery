@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>원하연 | 다이어트 베이킹</title>
+<title>bong베이커리 | 다이어트 베이킹</title>
 <meta name="description" content="설탕과 밀가루를 덜어낸 다이어트 구움과자. 파운드케이크·치즈케이크·휘낭시에와 주문 제작 다이어트 케이크.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +52,7 @@
   }
   nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
   .brand{
-    font-family:var(--serif); font-size:16px; font-weight:600; letter-spacing:.18em;
+    font-family:var(--serif); font-size:17px; font-weight:600; letter-spacing:.02em;
     text-decoration:none; white-space:nowrap; transition:opacity .15s; color:var(--ink);
   }
   .brand span{
@@ -172,75 +172,6 @@
   .tl-item h3{ font-size:18.5px; margin:3px 0 4px; }
   .tl-item p{ margin:0; color:var(--muted); font-size:14.5px; }
 
-  /* ---------- Game ---------- */
-  .game-sec{ background:var(--cream-2); border-block:1px solid var(--line); }
-  .game{
-    --cell: min(30px, 7.4vw);
-    display:flex; gap:clamp(16px,3vw,32px); justify-content:center;
-    align-items:flex-start; flex-wrap:wrap;
-  }
-  .board{
-    display:grid;
-    grid-template-columns:repeat(10, var(--cell));
-    grid-template-rows:repeat(20, var(--cell));
-    gap:1px; padding:7px; border-radius:12px;
-    background:var(--oven);
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), 0 16px 38px rgba(26,26,24,.18);
-    position:relative;
-  }
-  .cell{
-    background:rgba(255,255,255,.045); border-radius:4px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:calc(var(--cell) * .6); line-height:1; user-select:none;
-  }
-  .cell.on{ border-radius:6px; box-shadow:inset 0 -3px 0 rgba(0,0,0,.18), inset 0 2px 0 rgba(255,255,255,.28); }
-  .cell.ghost{ background:rgba(242,193,78,.10); box-shadow:inset 0 0 0 1.5px rgba(242,193,78,.45); border-radius:6px; }
-  .cell.flash{ background:#FFF !important; box-shadow:0 0 14px rgba(255,255,255,.9); }
-
-  .panel{ width:min(220px, 60vw); display:grid; gap:14px; }
-  .box{ background:var(--white); border:1px solid var(--line); border-radius:2px; padding:16px 18px; box-shadow:var(--shadow); }
-  .box h4{ margin:0 0 10px; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-family:var(--sans); font-weight:700; }
-  .next{ display:grid; grid-template-columns:repeat(4, calc(var(--cell) * .82)); grid-template-rows:repeat(4, calc(var(--cell) * .82)); gap:1px; justify-content:center; }
-  .next .cell{ font-size:calc(var(--cell) * .5); background:transparent; }
-  .next .cell.on{ background:transparent; }
-  .scores{ display:grid; grid-template-columns:1fr 1fr; gap:12px 10px; }
-  .scores div span{ display:block; font-size:11.5px; color:var(--muted); letter-spacing:.06em; }
-  .scores div b{ font-family:var(--serif); font-size:23px; color:var(--crust); }
-  .scores div:first-child{ grid-column:1 / -1; }
-  .scores div:first-child b{ font-size:30px; }
-
-  .gbtn{
-    width:100%; padding:11px; border-radius:10px; border:none; cursor:pointer;
-    background:var(--crust-dark); color:var(--cream);
-    font-family:var(--sans); font-size:14.5px; font-weight:600;
-    transition:background .15s, transform .12s;
-  }
-  .gbtn:hover{ background:#341f0f; transform:translateY(-1px); }
-  .keys{ font-size:12.5px; color:var(--muted); line-height:2; }
-  .keys kbd{
-    background:var(--cream-2); border:1px solid var(--line); border-bottom-width:2px;
-    border-radius:5px; padding:1px 7px; font-family:var(--sans); font-size:11.5px; color:var(--ink);
-  }
-
-  .touch{ display:none; gap:8px; margin-top:14px; }
-  .touch button{
-    flex:1; padding:15px 0; font-size:19px; border-radius:11px;
-    border:1px solid var(--line); background:var(--white); color:var(--crust-dark); cursor:pointer;
-  }
-  .touch button:active{ background:var(--cream-2); }
-  @media (hover:none) and (pointer:coarse){ .touch{ display:flex; } }
-
-  .overlay{
-    position:absolute; inset:0; border-radius:12px;
-    background:rgba(56,37,26,.93); color:var(--cream);
-    display:none; flex-direction:column; align-items:center; justify-content:center;
-    gap:8px; text-align:center; padding:24px;
-  }
-  .overlay.show{ display:flex; }
-  .overlay .big{ font-family:var(--serif); font-size:26px; }
-  .overlay .small{ font-size:13.5px; opacity:.72; max-width:22ch; line-height:1.7; }
-  .overlay button{ margin-top:12px; }
-
   /* ---------- Contact / footer ---------- */
   .contact{ text-align:center; }
   .contact h2{ font-size:clamp(28px,4.4vw,42px); margin-bottom:16px; }
@@ -311,13 +242,12 @@
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top">HAYEON <span>less sugar</span></a>
+    <a class="brand" href="#top">bong베이커리 <span>less sugar</span></a>
     <div class="navlinks">
       <a href="#about">브랜드</a>
       <a href="#works">메뉴</a>
       <a href="#career">이야기</a>
       <a href="#area">광교 상권</a>
-      <a href="#game">빵 테트리스</a>
       <a href="#contact">주문 문의</a>
     </div>
   </div>
@@ -465,11 +395,6 @@
         </div>
       </div>
     </div>
-
-    <div class="reveal" style="margin-top:8px;">
-      <img src="img/grain.jpg" alt="통곡물 빵 단면" loading="lazy"
-           style="width:100%; aspect-ratio:21/9; object-fit:cover; display:block;">
-    </div>
   </div>
 </section>
 
@@ -510,7 +435,7 @@
       </div>
       <div class="tl-item">
         <div class="tl-year">2026</div>
-        <h3>HAYEON less sugar · 오픈</h3>
+        <h3>bong베이커리 · 오픈</h3>
         <p>10년 다니던 회사를 나와 작업실 겸 매장을 열었습니다.
            원가표는 여전히 제가 직접 짭니다. 그건 잘하는 일이라서요.</p>
       </div>
@@ -634,403 +559,9 @@
   </div>
 </section>
 
-<section id="game" class="game-sec tab-panel">
-  <div class="wrap">
-    <div class="sec-head reveal" style="text-align:center;">
-      <span class="sec-num">Game</span>
-      <h2>빵 테트리스</h2>
-      <p style="margin-inline:auto;">기다리는 동안 한 판 하세요. 떨어지는 빵을 쌓아 한 줄을 채우면 판매 완료입니다.</p>
-    </div>
-
-    <div class="game reveal">
-      <div class="board" id="board">
-        <div class="overlay" id="overlay">
-          <div class="big" id="ovTitle">🥐 빵 테트리스</div>
-          <div class="small" id="ovText">방향키로 옮기고, ↑로 회전하고, 스페이스로 한 번에 내립니다.</div>
-          <button class="gbtn" id="ovBtn" style="width:auto; padding:11px 26px;">시작하기</button>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="box">
-          <h4>Next</h4>
-          <div class="next" id="next"></div>
-        </div>
-        <div class="box">
-          <h4>Score</h4>
-          <div class="scores">
-            <div><span>매출 점수</span><b id="score">0</b></div>
-            <div><span>판매 줄</span><b id="lines">0</b></div>
-            <div><span>레벨</span><b id="level">1</b></div>
-          </div>
-        </div>
-        <button class="gbtn" id="startBtn">시작 / 다시하기</button>
-        <div class="box keys">
-          <kbd>←</kbd> <kbd>→</kbd> 이동<br>
-          <kbd>↓</kbd> 빠르게 내리기<br>
-          <kbd>↑</kbd> 회전<br>
-          <kbd>Space</kbd> 한 번에 내리기<br>
-          <kbd>P</kbd> 일시정지
-        </div>
-        <div class="touch">
-          <button data-act="left">←</button>
-          <button data-act="rotate">⟳</button>
-          <button data-act="right">→</button>
-          <button data-act="down">↓</button>
-          <button data-act="drop">⤓</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section id="contact" class="contact tab-panel">
-  <div class="wrap">
-    <div class="reveal">
-      <span class="sec-num">Contact</span>
-      <h2>주문 문의</h2>
-      <p>케이크 주문은 수령 3일 전까지, 구움과자는 당일 재고 확인 후 안내드립니다.
-         알레르기나 원하시는 당도가 있으면 함께 적어주세요.</p>
-      <div class="links">
-        <a class="btn btn-solid" href="mailto:whyeon84@gmail.com">whyeon84@gmail.com</a>
-        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">카카오톡 채널</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>© 2026 HAYEON less sugar · 원하연 &nbsp;|&nbsp; 설탕을 덜고, 맛은 남깁니다.</footer>
+<footer>© 2026 bong베이커리 · 원하연 &nbsp;|&nbsp; 설탕을 덜고, 맛은 남깁니다.</footer>
 
 <script>
-/* ===========================================================
-   빵 테트리스
-   =========================================================== */
-(function(){
-  const COLS = 10, ROWS = 20;
-
-  // 각 테트로미노 = 빵 한 종류
-  const PIECES = {
-    I: { emoji:'🥖', color:'#D9A05B', cells:[[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]] },
-    J: { emoji:'🥐', color:'#E0B473', cells:[[1,0,0],[1,1,1],[0,0,0]] },
-    L: { emoji:'🥨', color:'#A6693C', cells:[[0,0,1],[1,1,1],[0,0,0]] },
-    O: { emoji:'🍞', color:'#F0CB8E', cells:[[1,1],[1,1]] },
-    S: { emoji:'🥯', color:'#C98F55', cells:[[0,1,1],[1,1,0],[0,0,0]] },
-    T: { emoji:'🧁', color:'#E08D7E', cells:[[0,1,0],[1,1,1],[0,0,0]] },
-    Z: { emoji:'🍩', color:'#C97F9E', cells:[[1,1,0],[0,1,1],[0,0,0]] }
-  };
-  const KEYS = Object.keys(PIECES);
-
-  const boardEl   = document.getElementById('board');
-  const nextEl    = document.getElementById('next');
-  const overlay   = document.getElementById('overlay');
-  const ovTitle   = document.getElementById('ovTitle');
-  const ovText    = document.getElementById('ovText');
-  const ovBtn     = document.getElementById('ovBtn');
-  const scoreEl   = document.getElementById('score');
-  const linesEl   = document.getElementById('lines');
-  const levelEl   = document.getElementById('level');
-  const startBtn  = document.getElementById('startBtn');
-
-  // 셀 DOM 생성 (한 번만)
-  const cells = [];
-  for(let i=0; i<ROWS*COLS; i++){
-    const d = document.createElement('div');
-    d.className = 'cell';
-    boardEl.appendChild(d);
-    cells.push(d);
-  }
-  const nextCells = [];
-  for(let i=0; i<16; i++){
-    const d = document.createElement('div');
-    d.className = 'cell';
-    nextEl.appendChild(d);
-    nextCells.push(d);
-  }
-
-  let grid, cur, nextPiece, score, lines, level;
-  let running = false, paused = false, over = false;
-  let dropCounter = 0, lastTime = 0, rafId = null, clearing = false;
-
-  const empty = () => Array.from({length:ROWS}, () => Array(COLS).fill(null));
-
-  function randPiece(){
-    const k = KEYS[(Math.random()*KEYS.length)|0];
-    const p = PIECES[k];
-    const shape = p.cells.map(r => r.slice());
-    return {
-      key: k,
-      shape,
-      x: ((COLS - shape[0].length) / 2) | 0,
-      y: -shape.length + (k === 'I' ? 2 : 1)   // 위쪽 빈 줄만큼 보정
-    };
-  }
-
-  function rotate(shape){
-    const n = shape.length;
-    const out = Array.from({length:n}, () => Array(n).fill(0));
-    for(let y=0; y<n; y++)
-      for(let x=0; x<n; x++)
-        out[y][x] = shape[n-1-x][y];
-    return out;
-  }
-
-  function collides(shape, px, py){
-    for(let y=0; y<shape.length; y++){
-      for(let x=0; x<shape[y].length; x++){
-        if(!shape[y][x]) continue;
-        const nx = px + x, ny = py + y;
-        if(nx < 0 || nx >= COLS || ny >= ROWS) return true;
-        if(ny >= 0 && grid[ny][nx]) return true;
-      }
-    }
-    return false;
-  }
-
-  function merge(){
-    for(let y=0; y<cur.shape.length; y++){
-      for(let x=0; x<cur.shape[y].length; x++){
-        if(!cur.shape[y][x]) continue;
-        const ny = cur.y + y, nx = cur.x + x;
-        if(ny < 0){ gameOver(); return false; }
-        grid[ny][nx] = cur.key;
-      }
-    }
-    return true;
-  }
-
-  function ghostY(){
-    let y = cur.y;
-    while(!collides(cur.shape, cur.x, y+1)) y++;
-    return y;
-  }
-
-  function paintCell(el, key){
-    const p = PIECES[key];
-    el.className = 'cell on';
-    el.style.background = p.color;
-    el.textContent = p.emoji;
-  }
-  function clearCell(el){
-    el.className = 'cell';
-    el.style.background = '';
-    el.textContent = '';
-  }
-
-  function render(){
-    if(clearing) return;
-    for(let y=0; y<ROWS; y++){
-      for(let x=0; x<COLS; x++){
-        const el = cells[y*COLS + x];
-        if(grid[y][x]) paintCell(el, grid[y][x]);
-        else clearCell(el);
-      }
-    }
-    if(cur && running && !over){
-      // 고스트
-      const gy = ghostY();
-      for(let y=0; y<cur.shape.length; y++){
-        for(let x=0; x<cur.shape[y].length; x++){
-          if(!cur.shape[y][x]) continue;
-          const ny = gy + y, nx = cur.x + x;
-          if(ny >= 0 && ny < ROWS && !grid[ny][nx]) cells[ny*COLS+nx].className = 'cell ghost';
-        }
-      }
-      // 현재 조각
-      for(let y=0; y<cur.shape.length; y++){
-        for(let x=0; x<cur.shape[y].length; x++){
-          if(!cur.shape[y][x]) continue;
-          const ny = cur.y + y, nx = cur.x + x;
-          if(ny >= 0) paintCell(cells[ny*COLS+nx], cur.key);
-        }
-      }
-    }
-  }
-
-  function renderNext(){
-    nextCells.forEach(clearCell);
-    if(!nextPiece) return;
-    const s = nextPiece.shape;
-    // 4x4 안에 가운데 정렬
-    const rows = s.filter(r => r.some(v => v));
-    const offY = ((4 - rows.length) / 2) | 0;
-    const cols = s[0].length;
-    const offX = ((4 - cols) / 2) | 0;
-    for(let y=0; y<rows.length; y++){
-      for(let x=0; x<cols; x++){
-        if(!rows[y][x]) continue;
-        const idx = (y+offY)*4 + (x+offX);
-        if(nextCells[idx]) paintCell(nextCells[idx], nextPiece.key);
-      }
-    }
-  }
-
-  function clearLines(){
-    const full = [];
-    for(let y=0; y<ROWS; y++){
-      if(grid[y].every(v => v)) full.push(y);
-    }
-    if(!full.length) return;
-
-    clearing = true;
-    full.forEach(y => {
-      for(let x=0; x<COLS; x++) cells[y*COLS+x].classList.add('flash');
-    });
-
-    setTimeout(() => {
-      full.forEach(y => {
-        grid.splice(y, 1);
-        grid.unshift(Array(COLS).fill(null));
-      });
-      const pts = [0, 100, 300, 500, 800][full.length] * level;
-      score += pts;
-      lines += full.length;
-      level  = Math.floor(lines / 10) + 1;
-      scoreEl.textContent = score.toLocaleString();
-      linesEl.textContent = lines;
-      levelEl.textContent = level;
-      clearing = false;
-      render();
-    }, 160);
-  }
-
-  function spawn(){
-    cur = nextPiece || randPiece();
-    nextPiece = randPiece();
-    renderNext();
-    if(collides(cur.shape, cur.x, cur.y)) gameOver();
-  }
-
-  function drop(){
-    if(!cur) return;
-    if(!collides(cur.shape, cur.x, cur.y + 1)){
-      cur.y++;
-    } else {
-      if(!merge()) return;
-      clearLines();
-      spawn();
-    }
-  }
-
-  function move(dx){
-    if(!cur || !running || paused || over) return;
-    if(!collides(cur.shape, cur.x + dx, cur.y)){ cur.x += dx; render(); }
-  }
-
-  function doRotate(){
-    if(!cur || !running || paused || over) return;
-    const r = rotate(cur.shape);
-    // 간단한 월킥
-    for(const k of [0, -1, 1, -2, 2]){
-      if(!collides(r, cur.x + k, cur.y)){ cur.shape = r; cur.x += k; render(); return; }
-    }
-  }
-
-  function softDrop(){
-    if(!cur || !running || paused || over) return;
-    drop(); score += 1; scoreEl.textContent = score.toLocaleString();
-    dropCounter = 0; render();
-  }
-
-  function hardDrop(){
-    if(!cur || !running || paused || over) return;
-    let d = 0;
-    while(!collides(cur.shape, cur.x, cur.y + 1)){ cur.y++; d++; }
-    score += d * 2; scoreEl.textContent = score.toLocaleString();
-    drop(); dropCounter = 0; render();
-  }
-
-  const speed = () => Math.max(90, 780 - (level - 1) * 68);
-
-  function loop(t = 0){
-    rafId = requestAnimationFrame(loop);
-    if(!running || paused || over || clearing) { lastTime = t; return; }
-    const dt = t - lastTime;
-    lastTime = t;
-    dropCounter += dt;
-    if(dropCounter > speed()){
-      dropCounter = 0;
-      drop();
-      render();
-    }
-  }
-
-  function showOverlay(title, text, btn){
-    ovTitle.textContent = title;
-    ovText.textContent  = text;
-    ovBtn.textContent   = btn;
-    overlay.classList.add('show');
-  }
-
-  function gameOver(){
-    over = true; running = false;
-    showOverlay('🧑‍🍳 오늘 영업 종료!', '매출 점수 ' + score.toLocaleString() + '점 · ' + lines + '줄 판매', '다시 굽기');
-  }
-
-  function start(){
-    grid = empty();
-    score = 0; lines = 0; level = 1;
-    scoreEl.textContent = '0'; linesEl.textContent = '0'; levelEl.textContent = '1';
-    over = false; paused = false; clearing = false;
-    dropCounter = 0; lastTime = performance.now();
-    nextPiece = randPiece();
-    spawn();
-    running = true;
-    overlay.classList.remove('show');
-    render();
-    if(rafId === null) loop();
-  }
-
-  function togglePause(){
-    if(!running || over) return;
-    paused = !paused;
-    if(paused) showOverlay('⏸ 잠시 휴식', '오븐이 예열 중입니다.', '이어서 굽기');
-    else overlay.classList.remove('show');
-  }
-
-  // 입력
-  document.addEventListener('keydown', e => {
-    const k = e.key;
-    if(['ArrowLeft','ArrowRight','ArrowDown','ArrowUp',' '].includes(k)){
-      // 게임이 화면에 보일 때만 스크롤 차단
-      const r = boardEl.getBoundingClientRect();
-      const visible = r.top < window.innerHeight && r.bottom > 0;
-      if(visible && running) e.preventDefault(); else return;
-    }
-    if(k === 'ArrowLeft')  move(-1);
-    else if(k === 'ArrowRight') move(1);
-    else if(k === 'ArrowDown')  softDrop();
-    else if(k === 'ArrowUp')    doRotate();
-    else if(k === ' ')          hardDrop();
-    else if(k === 'p' || k === 'P') togglePause();
-  }, { passive:false });
-
-  document.querySelectorAll('.touch button').forEach(b => {
-    b.addEventListener('click', () => {
-      const a = b.dataset.act;
-      if(a === 'left') move(-1);
-      else if(a === 'right') move(1);
-      else if(a === 'down') softDrop();
-      else if(a === 'rotate') doRotate();
-      else if(a === 'drop') hardDrop();
-    });
-  });
-
-  startBtn.addEventListener('click', start);
-  ovBtn.addEventListener('click', () => {
-    if(paused && !over){ togglePause(); } else { start(); }
-  });
-
-  // 초기 화면
-  grid = empty();
-  score = 0; lines = 0; level = 1;
-  render();
-  nextPiece = null;
-  overlay.classList.add('show');
-})();
-
-
 /* ===========================================================
    섹션 탭 — 고른 섹션 하나만 펼친다
    =========================================================== */
